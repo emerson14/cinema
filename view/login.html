@@ -15,11 +15,108 @@
         <link rel="stylesheet" href="../css/styles.css">
     </head>
     <body> 
-        <div id="app">
-
-            <h1 class="text-center mt-5">LOG-IN PAGE</h1>
-
+       <!-- CARD lOGIN -->
+    <div class="card "  id="cardlogin">
+        <div id="app" class="container">
+    
+            
+            <div class="abs-center"  >
+    
+                <div class="card-body">
+                <img src="/image/logocinema.png" style="width:300px;" alt="">
+                <h1 class="mb-3">Iniciar Sesión</h1>
+                <div class="form-floating mb-3">
+                  <span>Usuario:</span>
+                  <input type="text" name="email" id="email" class="form-control" v-model="username">
+                  
+                </div>
+                <div class="form-floating mb-3">
+                  <span>Contraseña:</span>
+                  <input @keyup.enter="login" type="password" name="password" id="password" class="form-control" v-model="PIN">
+                </div>
+                <button type="submit" class="btn btn-primary" @click="login">Ingresar</button>
+                <div>
+                <span><a href="#cardregistrarse">Crear Cuenta</a> </span>
+              </div>
+              </div>
+            </div>
+            
+         
+          </div>
+          
         </div>
+        <div class="row">
+        <div class="card" id="cardcode" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Codigo de confirmacion</h5>
+              <p class="card-text">Le hemos enviado un codigo de confirmacion, por favor digitelo:</p>
+              <input    class="form-control" >
+              <a href="#" class="card-link">Reenviar Nuevo Codido</a>
+              <button type="submit" class="btn btn-primary" >Cerrar</button>
+              <button type="submit" class="btn btn-primary" >Continuar</button>
+            </div>
+            </div>
+          </div>
+        <hr style="width:100%; margin-top: 100px;">
+  
+        <!-- CARD REGISTRARSE -->
+        <div class="card "  id="cardregistrarse">
+          <div id="app" class="container">
+      
+              
+              <div class="abs-center"  >
+      
+                  <div class="card-body">
+                  <img src="/RickAndMortyVue/images/logologin.png" alt="">
+                  <h1 class="mb-3">Crear cuenta</h1>
+                  <div class="form-floating mb-3">
+                   <span>Nombre</span>
+                    <input type="text" name="email" id="email" class="form-control" >
+                  </div>
+                  <div class="form-floating mb-3">
+                    <span>Apellidos</span>
+                     <input type="text" name="email" id="email" class="form-control" >
+                   </div>
+                   <div class="form-floating mb-3">
+                    <span>Direccion:</span>
+                     <input type="text" name="email" id="email" class="form-control" >
+                   </div>
+                   <div class="form-floating mb-3">
+                    <span>Telefono</span>
+                     <input type="text" name="email" id="email" class="form-control" >
+                   </div>
+                   <div class="form-floating mb-3">
+                    <span>email</span>
+                     <input type="text" name="email" id="email" class="form-control" >
+                   </div>
+                  <div class="form-floating mb-3">
+                    <span>Usuario</span>
+                    <input type="text" name="email" id="email" class="form-control" >
+                  </div>
+                  <div class="form-floating mb-3">
+                    <span>Pin </span>
+                    <input type="text" name="email" id="email" class="form-control" >
+                  </div>
+                  <div class="form-floating mb-3">
+                    <span>Confirmar PIN</span>
+                    <input @keyup.enter="login" type="password" name="password" id="password" class="form-control" v-model="password">
+                  </div>
+                  <div >
+                  <button type="submit" class="btn btn-primary" @click="login">Registrarse</button>
+                </div>
+                <div style="margin-top: 15px;" >  
+                  <button type="submit" class="btn btn-primary" @click="login"></button>
+                </div>
+                  <div style="margin-top: 15px;">
+                  <span><a href="#app">¿Ya tienes cuenta? Inicia secion</a> </span>
+                </div>
+                </div>
+                
+              </div>
+              
+           
+            </div>
+          </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
     <script src="../js/vue.js"></script>
