@@ -5,14 +5,24 @@ var app = new Vue({
     data: {
         users: [
             {
-            name: 'test',
-            lastName: 'test1',
-            address: 'asdfas',
-            phoneNumber: '1234',
-            email: 'a@algo.com',
-            password: '1234',
-            status: 'inactive',
+                name: 'Anonymous',
+                lastName: 'Zero',
+                address: '000-000',
+                phoneNumber: '000-000',
+                email: 'admin@algo.com',
+                password: '1234',
+                role: 'superAdmin',
+                status: 'active',
             },
+            {
+                name: 'test',
+                lastName: 'test1',
+                address: 'asdfas',
+                phoneNumber: '1234',
+                email: 'a@algo.com',
+                password: '1234',
+                status: 'inactive',
+            }
         ],
 
         newUser: {
@@ -25,6 +35,43 @@ var app = new Vue({
             role: 'user',
             status: 'inactive',
         },
+        newMovie: {//para cuando el admin agregue una nueva pelicula
+            title: '',
+            release: '',
+            duration: '',
+            gender: '',
+            img: ''
+        },
+        movies: [//remporalmente con datos quemados, mientras se adpta el frontend para la creacion de peliculas por parte del admin
+            {
+            title: 'Buzz Lightyear',
+            release: '14/07/2022',
+            duration: '2 hours',
+            gender: 'test',
+            img: '../img/buzzlLightyearCard.jpg'
+            },
+            {
+            title: 'Jurassic World',
+            release: '14/07/2022',
+            duration: '2 hours',
+            gender: 'test',
+            img: '../img/jurassincWorldCard.jpg'
+            },
+            {
+            title: 'Minions',
+            release: '14/07/2022',
+            duration: '2 hours',
+            gender: 'test',
+            img: '../img/minions2Card.jpg'
+            },
+            {
+            title: 'Thor Amor y Trueno',
+            release: '14/07/2022',
+            duration: '2 hours',
+            gender: 'test',
+            img: '../img/thorAmorYTrueno.jpg'
+            }
+        ],
         confirmPass: '',//para el input de confirmación de contraseña
         email: '',
         password: '',
@@ -67,7 +114,10 @@ var app = new Vue({
             }
             this.confirmpass = '';
         },
-
+        addMovie(){//agrega la nueva pelicula en el arreglo de peliculas disponibles (movies)
+            //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
+            this.movies.push({...this.newMovie});
+        },
         login(){
 
             if(this.email == '' || this.password == ''){
@@ -84,7 +134,7 @@ var app = new Vue({
             });
 
             if(this.user == ''){
-                this.mensaje('Los datos ingresados son incorrectos');
+                this.mensaje('Los datos ingresados son incorrectos', 'error');
                 this.email = '';
                 this.password = '';
             }
@@ -100,30 +150,13 @@ var app = new Vue({
                 }
                 else{
 
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                          toast.addEventListener('mouseenter', Swal.stopTimer)
-                          toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                      })
-                      
-                      Toast.fire({
-                        icon: 'success',
-                        title: 'Has iniciado sesión correctamente'
-                      })
-
+                    this.mensaje('Ha iniciado sesión correctamente', 'success');
                     this.email = '';
                     this.password = '';
 
                     setTimeout(function(){     
                         window.location.href = "app.html";
-                  
-                      
+                    
                     }.bind(this), 3000);
 
                 }
