@@ -5,12 +5,13 @@ var app = new Vue({
     data: {
         users: [],
         newUser: {
-            name: 'test',
-            lastName: 'test1',
-            address: 'asdfas',
-            phoneNumber: '1234',
-            email: 'a@algo.com',
-            password: '1234',
+            name: '',
+            lastName: '',
+            address: '',
+            phoneNumber: '',
+            email: '',
+            password: '',
+            role: 'user',
             status: 'inactive',
         },
         confirmPass: '',//para el input de confirmación de contraseña
@@ -23,7 +24,7 @@ var app = new Vue({
                 && this.newUser.address.length > 0 && this.newUser.phoneNumber.length > 0 &&
                 this.newUser.email.length > 0 && this.newUser.password.length > 0
                 ) {
-                    if (this.confirmpass === this.newUser.password) {
+                    if (this.confirmPass === this.newUser.password) {
                         this.users.push({
                             ...this.newUser
                         });
