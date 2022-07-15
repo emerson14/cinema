@@ -72,7 +72,6 @@
                     <!-- /Carusel -->
                 </main>
             <!-- /carrusel -->
-            <!-- inicioCartelera -->
             <section id="cartelera" class="mt-4">
                 <div class="container">
                     <div class="row">
@@ -80,7 +79,6 @@
                             <h1 class="menu-title">EN CARTELERA</h1>
                         </div>
                     </div>
-                    <!-- cartelera cards -->
                     <div class="row">
                         <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
@@ -101,43 +99,46 @@
                             <hr>
                         </div>
                     </div>
-                    <!-- /cartelera cards -->
                 </div>
             </section>
-            <!-- /carteleraFin -->
             <section>
-                <!-- ModalCartelera -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" v-text="">titulo pelicula</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="number" class="form-control" id="" placeholder="Cantidad de tickets">
-                            <!-- <h6>Valor ud: $30.000</h6>                     -->
-                        </div>
-                        <h6 class="text-center">SELECCIONA TU MÉTODO DE PAGO</h6>
-                        <div class="row text-center">
-                            <div class="col-12 form-check form-check-inline mt-2 mb-2 mw-100">
-                                <label class="radio-inline"> <input v-model="" type="radio" name="" id="conv" value="" checked><img src="/img/mastercard.svg" alt="" class="ms-2"></label>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel" v-text="">titulo pelicula</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="col-12 form-check form-check-inline mt-2 mb-2">
-                                <label class="radio-inline"> <input v-model="" type="radio" name="" id="conv" value=""><img src="/img/nequi.svg" alt="" class="ms-2"></label>
+                            <div class="modal-body">                   
+                                <input type="number" class="form-control" id="" placeholder="Cantidad de tickets">
+                                <h6 class="text-center">SELECCIONA TU MÉTODO DE PAGO</h6>
+                                <div class="d-flex justify-content-center mt-3">
+
+                                    <div class="col-1 d-flex align-items-center ">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="1" v-model="pago">
+                                    </div>
+
+                                    <div class="col-4 align-items-end">
+                                      <img src="/img/nequi.svg" alt="" style="width: 200px; height: 50px;" class="align-items-end">
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <div class="col-1 d-flex align-items-center ">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="2"
+                                        v-model="pago">
+                                    </div>
+                                    <div class="col-4 align-items-end">
+                                      <img src="/img/mastercard.svg" alt="" style="width: 200px; height: 50px;" class="align-items-end">
+                                    </div>
+                                </div>
+                            </div>                               
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Pagar</button>
                             </div>
                         </div>
-                        <div>
-                            
-                        </div>           
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Pagar</button>
-                        </div>
-                    </div>
                     </div>
                 </div>
-                <!-- finModalCartelera -->
             </section>
             <!-- FOOTER -->
             <footer id="footer" class="pb-4 pt-4">
