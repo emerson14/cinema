@@ -1,0 +1,83 @@
+body{
+    background-color: white;
+}
+header{
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+#footer {
+    background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+}
+
+#footer a, h6 {
+    text-decoration: none;
+    color: #000;
+}
+
+#footer h6 i{
+    font-size: 20px;
+}
+
+#footer a{
+    color: #000;
+}
+
+#footer a:hover{
+    color: #fff;
+}
+/*END FOOTER*/
+#footerModal{
+    background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+}
+#navbar{
+    background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+#navbar img{
+    width: 50px;
+    height: 50px;
+}
+
+#navbar .navbar-brand span{
+    border: 3px solid #fff;
+    color: #000;
+    font-weight: bold;
+}
+
+#navbar a{
+    color: #000;
+    font-weight: bold;
+}
+
+#navbar a:hover{
+    color: #fff;
+}
+
+#navbar .logout:hover{
+    color: red;
+}
+
+#navbar .nav-item .profile{
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+#navbar .dropdown-menu a:hover{
+    color: #4f87ef;
+    cursor: pointer;
+}
+
+#navbar .navbar-nav .msg:hover{
+    color: #000;
+}
+
+#navbar .navbar-nav .msg span{
+    color: #fff;
+}
+
+#navbar .navbar-nav .msg span:hover{
+    color: #fffb01;
+}
