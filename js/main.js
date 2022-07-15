@@ -3,7 +3,18 @@
 var app = new Vue({
     el: '#app',
     data: {
-        users: [],
+        users: [
+            {
+            name: 'test',
+            lastName: 'test1',
+            address: 'asdfas',
+            phoneNumber: '1234',
+            email: 'a@algo.com',
+            password: '1234',
+            status: 'inactive',
+            },
+        ],
+
         newUser: {
             name: 'test',
             lastName: 'test1',
@@ -79,7 +90,7 @@ var app = new Vue({
             else{
                 if(this.user.status == 'inactive' ){
                     this.generateCode();
-                    
+
                     //se abre la modal y ese boton redirige a una nueva funcion 'validateCode'
 
                     this.email = '';
@@ -109,7 +120,7 @@ var app = new Vue({
                     this.password = '';
 
                     setTimeout(function(){     
-                        window.location.href = "view/app.html";
+                        window.location.href = "app.html";
                   
                       
                     }.bind(this), 3000);
@@ -129,6 +140,31 @@ var app = new Vue({
             if(this.code == this.confirmPass){
                 this.mensaje('Su cuenta ha sido activada', 'succes');
                 this.user.status = 'active'
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Has iniciado sesión correctamente'
+                  })
+
+                this.email = '';
+                this.password = '';
+
+                setTimeout(function(){     
+                    window.location.href = "app.html";
+              
+                  
+                }.bind(this), 3000);
             }
         },
 
