@@ -42,7 +42,7 @@ header{
 }
 
 #navbar .navbar-brand span{
-    border: 3px solid #fff;
+    /* border: 3px solid #fff; */
     color: #000;
     font-weight: bold;
 }
@@ -80,4 +80,56 @@ header{
 
 #navbar .navbar-nav .msg span:hover{
     color: #fffb01;
+}
+#cartelera .menu-title{
+    color: #000;
+}
+
+#cartelera hr{
+    color: #000;
+}
+
+#cartelera .card{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.09);
+    transition: 0.2s ease;
+}
+
+#cartelera .card:hover{
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+#cartelera .card span{
+    border: none;
+}
+
+#cartelera .card-body p{
+    text-align: justify;
+}
+
+#cartelera .card-body h5{
+    font-weight: bold;
+    color: #0a3991;
+}
+
+#cartelera .card-body span{
+    color: #000;
+}
+
+#cartelera .card-footer{
+    color: #fff;
+    background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+}
+
+#cartelera .card-footer img{
+    width: 60px;
+    height: 40px;
+    margin: auto;
+    display: flex;
+}
+
+#cartelera .card-footer button{
+    margin-right: 5px;
 }
