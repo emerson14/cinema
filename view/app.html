@@ -90,10 +90,11 @@
                                     <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                    
                                     <h6 class="card-title">Genero: <span v-text=""></span></h6>                                    
                                     <h6 class="card-title">Duracion: <span v-text=""></span></h6>                                 
+                                    <h6 class="card-title">Valor: $ <span v-text=""></span></h6>                                 
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                        <button type="button" class="btn btn-warning" @click="">Comprar ticket</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning" @click="">Comprar ticket</button>
                                     </div> 
                                 </div>
                             </div>
@@ -104,6 +105,40 @@
                 </div>
             </section>
             <!-- /carteleraFin -->
+            <section>
+                <!-- ModalCartelera -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" v-text="">titulo pelicula</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="number" class="form-control" id="" placeholder="Cantidad de tickets">
+                            <!-- <h6>Valor ud: $30.000</h6>                     -->
+                        </div>
+                        <h6 class="text-center">SELECCIONA TU MÉTODO DE PAGO</h6>
+                        <div class="row text-center">
+                            <div class="col-12 form-check form-check-inline mt-2 mb-2 mw-100">
+                                <label class="radio-inline"> <input v-model="" type="radio" name="" id="conv" value="" checked><img src="/img/mastercard.svg" alt="" class="ms-2"></label>
+                            </div>
+                            <div class="col-12 form-check form-check-inline mt-2 mb-2">
+                                <label class="radio-inline"> <input v-model="" type="radio" name="" id="conv" value=""><img src="/img/nequi.svg" alt="" class="ms-2"></label>
+                            </div>
+                        </div>
+                        <div>
+                            
+                        </div>           
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Pagar</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- finModalCartelera -->
+            </section>
             <!-- FOOTER -->
             <footer id="footer" class="pb-4 pt-4">
                 <div class="container">
