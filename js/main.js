@@ -153,7 +153,6 @@ var app = new Vue({
                     this.mensaje('Ha iniciado sesión correctamente', 'success');
                     this.email = '';
                     this.password = '';
-
                     setTimeout(function(){     
                         window.location.href = "app.html";
                     
