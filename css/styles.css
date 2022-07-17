@@ -140,6 +140,9 @@ header{
 #cartelera .card-footer button{
     margin-right: 5px;
 }
+#ticket .modal-footer{
+    background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+}
 
 /* Brayan  */
 #main .carousel-inner img {
