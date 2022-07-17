@@ -1,7 +1,7 @@
 body{
 
     background-color: white;
-    background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+    /* background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -139,6 +139,9 @@ header{
 
 #cartelera .card-footer button{
     margin-right: 5px;
+}
+#ticket .modal-footer{
+    background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
 }
 
 /* Brayan  */
