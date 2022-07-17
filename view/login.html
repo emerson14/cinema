@@ -27,14 +27,48 @@
                 <h1 class="mb-3">Iniciar Sesión</h1>
                 <div class="form-floating mb-3">
                   <span>Usuario:</span>
-                  <input type="text" name="email" id="email" class="form-control" v-model="username">
+                  <input type="text" name="email" id="email" class="form-control" >
                   
                 </div>
                 <div class="form-floating mb-3">
                   <span>Contraseña:</span>
-                  <input @keyup.enter="login" type="password" name="password" id="password" class="form-control" v-model="PIN">
+                  <input type="password" name="password" id="password" class="form-control" >
                 </div>
-                <button type="submit" class="btn btn-primary" @click="login">Ingresar</button>
+                <button type="submit" class="btn btn-primary" >Ingresar</button>
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalcode" >Ingresar</button>
+       
+
+
+<!-- Modal code-->
+<div class="modal fade" id="modalcode" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Codigo de confirmacion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="card" id="cardcode" >
+              <div class="card-body">
+                <h5 class="card-title">Codigo de confirmacion</h5>
+                <p class="card-text">Le hemos enviado un codigo irmacion, por favor digitelo:</p>
+                <input    class="form-control" >
+                <a href="#" class="card-link">Reenviar Nuevo Codido</a>
+             
+               
+              </div>
+              </div>
+            </div>    
+            </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >Cerrar</button>
+        <button type="submit" class="btn btn-primary" >Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
                 <div>
                 <span><a href="#cardregistrarse">Crear Cuenta</a> </span>
               </div>
@@ -45,18 +79,7 @@
           </div>
           
         </div>
-        <div class="row">
-        <div class="card" id="cardcode" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Codigo de confirmacion</h5>
-              <p class="card-text">Le hemos enviado un codigo de confirmacion, por favor digitelo:</p>
-              <input    class="form-control" >
-              <a href="#" class="card-link">Reenviar Nuevo Codido</a>
-              <button type="submit" class="btn btn-primary" >Cerrar</button>
-              <button type="submit" class="btn btn-primary" >Continuar</button>
-            </div>
-            </div>
-          </div>
+        
         <hr style="width:100%; margin-top: 100px;">
   
         <!-- CARD REGISTRARSE -->
@@ -67,7 +90,7 @@
               <div class="abs-center"  >
       
                   <div class="card-body">
-                  <img src="/RickAndMortyVue/images/logologin.png" alt="">
+                  <img src="/image/logocinema.png"  alt="" >
                   <h1 class="mb-3">Crear cuenta</h1>
                   <div class="form-floating mb-3">
                    <span>Nombre</span>
@@ -99,7 +122,7 @@
                   </div>
                   <div class="form-floating mb-3">
                     <span>Confirmar PIN</span>
-                    <input @keyup.enter="login" type="password" name="password" id="password" class="form-control" v-model="password">
+                    <input  type="password" name="password" id="password" class="form-control" >
                   </div>
                   <div >
                   <button type="submit" class="btn btn-primary" @click="login">Registrarse</button>
