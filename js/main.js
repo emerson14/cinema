@@ -3,7 +3,6 @@
 var app = new Vue({
     el: '#app',
     data: {
-<<<<<<< HEAD
         users: [
             {
                 name: 'Anonymous',
@@ -15,15 +14,6 @@ var app = new Vue({
                 role: 'superAdmin',
                 status: 'active',
             },
-            {
-                name: 'test',
-                lastName: 'test1',
-                address: 'asdfas',
-                phoneNumber: '1234',
-                email: 'a@algo.com',
-                password: '1234',
-                status: 'inactive',
-            }
         ],
 
         newUser: {
@@ -78,11 +68,8 @@ var app = new Vue({
         password: '',
         user: '',
         code: '',
+        confirmCode: '',
 
-
-=======
-        i:""
->>>>>>> frontend
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
@@ -98,6 +85,7 @@ var app = new Vue({
                         this.clearFields();
                         //this.updateLocalStorage();
                         this.mensaje("Su cuenta ha sido creada, un código de valicación fue enviado a su correo", "success");
+                        this.updateLocalStorage();
                     }else{
                         this.mensaje("La contraseña ingresada y la confirmación no coinciden", "error");
                     }
@@ -174,33 +162,16 @@ var app = new Vue({
                 return;
             
             }
-            if(this.code == this.confirmPass){
+            if(this.code == this.confirmCode){
                 this.mensaje('Su cuenta ha sido activada', 'succes');
                 this.user.status = 'active'
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                  })
-                  
-                  Toast.fire({
-                    icon: 'success',
-                    title: 'Has iniciado sesión correctamente'
-                  })
 
                 this.email = '';
                 this.password = '';
-
                 setTimeout(function(){     
                     window.location.href = "app.html";
               
-                  
+                
                 }.bind(this), 3000);
             }
         },
@@ -238,9 +209,22 @@ var app = new Vue({
                 title: msj
             })
         },
-
-
-
+        updateLocalStorage(){
+            localStorage.setItem('users', JSON.stringify(this.users));
+            localStorage.setItem('user', JSON.stringify(this.user));
+        },
 
     },
+    created(){
+        if (localStorage.getItem('users') !== null) {
+            this.users = JSON.parse(localStorage.getItem('users'));
+        }else{
+            this.users = this.users;
+        }
+        if (localStorage.getItem('user') !== null) {
+            this.user = JSON.parse(localStorage.getItem('user'));
+        }else{
+            this.user = '';
+        }
+    }
 });
