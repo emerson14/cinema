@@ -134,7 +134,11 @@ var app = new Vue({
             else{
                 if(this.user.status == 'inactive' ){
 
-                    this.genCode = setInterval(this.generateCode(), 5000);
+                    const genCode2 = () => {
+                        this.generateCode()
+                    }
+
+                    this.genCode = setInterval(genCode2, 30000);
                    
 
                     //se abre la modal y ese boton redirige a una nueva funcion 'validateCode'
