@@ -142,6 +142,9 @@ header{
 #ticket .modal-footer{
     background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
 }
+#cardPelis .card:hover{
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+}
 
 /* Brayan  */
 #main .carousel-inner img {
