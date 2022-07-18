@@ -130,8 +130,8 @@
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
                                 <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
                                 <div class="card-body">                                                                     
-                                    <h6 class="card-title">texto: <span v-text=""></span></h6>                                    
-                                    <h6 class="card-title">texto: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Nombre: <span v-text=""></span></h6>                                    
+                                    <h6 class="card-title">No. Asientos: <span v-text=""></span></h6>                                                                    
                                 </div>
                             </div>
                             <hr>
@@ -140,6 +140,31 @@
                 </div>
             </section>
             <!-- finalCardSalas -->
+            <!-- CardPeliculas -->
+            <section id="cartelera" class="mt-4" v-if="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center text-uppercase">
+                            <h1 class="menu-title">PELÍCULAS</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
+                            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                                <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
+                                <div class="card-body">                                                                     
+                                    <h6 class="card-title">Nombre: <span v-text=""></span></h6>                                    
+                                    <h6 class="card-title">Género: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Duración: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>                                                                    
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FinCardPeliculas -->
             <!-- FOOTER --> 
             <footer id="footer" class="pb-4 pt-4">
                 <div class="container">
