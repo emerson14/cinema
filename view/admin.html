@@ -55,7 +55,7 @@
             <!-- /Buttons -->
             <section class="mt-5 p-5">
                 <button class="btn btn-primary mb-2" >Usuarios</button>
-                <button class="btn btn-primary mb-2">Salas</button>
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#salas">Salas</button>
                 <button class="btn btn-primary mb-2">Películas</button>
             </section>
             <!-- /Buttons -->
@@ -89,6 +89,34 @@
                 </div>
             </section>
             <!-- /Table User -->
+            <!-- modalSalas -->
+            <section>
+                <div class="modal fade" id="salas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">Salas</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <span>Nombre</span>
+                                    <input type="text" class="form-control" id="" placeholder="nombre de la sala">
+                                </div>
+                                <div>
+                                    <span>Cantidad Asientos</span>
+                                    <input type="text" class="form-control" id="" placeholder="número de asientos">
+                                </div>                          
+                            </div>
+                            <div class="modal-footer" id="footerModal">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-warning">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- finalModalSalas -->
             <!-- FOOTER --> 
             <footer id="footer" class="pb-4 pt-4">
                 <div class="container">
