@@ -3,7 +3,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-        i:0
+        i:""
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         abc(){
