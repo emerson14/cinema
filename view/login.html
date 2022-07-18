@@ -28,7 +28,7 @@
                 <div class="form-floating mb-3">
                   <span>email:</span>
                   <!-- v-model asignar a estos campo EMAIL  -->
-                  <input type="text" name="email" id="email" class="form-control" >
+                  <input type="text"  class="form-control" >
                 </div>
                 <div class="form-floating mb-3">
                   <span>Contraseña:</span>
@@ -46,7 +46,7 @@
 </div>
 </div>
 </div>
-</div>
+
 
 
 <!-- Modal registrarse-->
@@ -59,45 +59,40 @@
       </div>
       <div class="modal-body">
        <!-- CARD REGISTRARSE -->
-       <div class="card "  id="cardregistrarse">
-        
-      
-              
+       <div class="card"  id="cardregistrarse">
         <div class="abs-center"  >
-
             <div class="card-body">
             <img src="../img/logocinema.png"  alt="" style="width:300px;">
             <h1 class="mb-3">Crear cuenta</h1>
             <div class="form-floating mb-3">
              <span>Nombre</span>
              <!-- nombre -->
-              <input type="text" name="email" id="email" class="form-control" >
+              <input type="text"   v-model="i" class="form-control"  >
             </div>
             <div class="form-floating mb-3">
               <span>Apellidos</span>
-       
-               <input type="text" name="email" id="email" class="form-control" >
+               <input type="text"  class="form-control" >
              </div>
              <div class="form-floating mb-3">
               <span>Direccion:</span>
-               <input type="text" name="email" id="email" class="form-control" >
+               <input type="text"  class="form-control" >
              </div>
              <div class="form-floating mb-3">
               <span>Telefono</span>
-               <input type="text" name="email" id="email" class="form-control" >
+               <input type="text"  class="form-control" >
              </div>
              <div class="form-floating mb-3">
               <span>email</span>
-               <input type="text" name="email" id="email" class="form-control" >
+               <input type="text"  class="form-control" >
              </div>
             <div class="form-floating mb-3">
               <span>Usuario</span>
-              <input type="text" name="email" id="email" class="form-control" >
+              <input type="text"  class="form-control" >
             </div>
             <div class="form-floating mb-3">
               <span>Contraseña </span>
               <!-- aca va estar asignada la variable contraseña -->
-              <input type="text" name="email" id="email" class="form-control" >
+              <input type="text"  class="form-control" >
             </div>
             <div class="form-floating mb-3">
               <span>Confirmar Contraseña</span>
@@ -108,13 +103,10 @@
           </div>
           
             <div style="margin-top: 15px;">
-            <span><a href="#app" style="color:#ffff ;">¿Ya tienes cuenta? Inicia secion</a> </span>
+            <span><a href="#cardlogin" style="color:#ffff ;">¿Ya tienes cuenta? Inicia secion</a> </span>
           </div>
           </div>
-          
         </div>
-        
-     
       </div>
       </div>
       <div class="modal-footer" id="modalregistrarsefooter">
@@ -157,7 +149,7 @@
   
         
          
-       
+</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
     <script src="../js/vue.js"></script>

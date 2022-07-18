@@ -3,6 +3,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+<<<<<<< HEAD
         users: [
             {
                 name: 'Anonymous',
@@ -79,6 +80,9 @@ var app = new Vue({
         code: '',
 
 
+=======
+        i:""
+>>>>>>> frontend
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
