@@ -145,6 +145,11 @@ header{
 #cardPelis .card:hover{
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
 }
+#btnSalas{
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
 
 /* Brayan  */
 #main .carousel-inner img {
