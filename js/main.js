@@ -12,7 +12,7 @@ var app = new Vue({
                 email: 'admin@algo.com',
                 password: '1234',
                 role: 'superAdmin',
-                status: 'active',
+                status: 'inactive',
             },
         ],
 
@@ -69,6 +69,7 @@ var app = new Vue({
         user: '',
         code: '',
         confirmCode: '',
+        genCode: '',
 
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
@@ -132,13 +133,16 @@ var app = new Vue({
             }
             else{
                 if(this.user.status == 'inactive' ){
-                    this.generateCode();
+
+                    this.genCode = setInterval(this.generateCode(), 5000);
+                   
 
                     //se abre la modal y ese boton redirige a una nueva funcion 'validateCode'
-
+                    btn = document.getElementById('code');
+                    btn.click();
                     this.email = '';
                     this.password = '';
-                    return;
+                   
                 }
                 else{
 
@@ -158,13 +162,15 @@ var app = new Vue({
         validateCode(){
 
             if(this.code == ''){
-                this.mensaje('Ingres el codigo enviado', 'error');
+                this.mensaje('Ingrese el codigo enviado', 'error');
                 return;
             
             }
             if(this.code == this.confirmCode){
+                clearInterval(this.genCode);
                 this.mensaje('Su cuenta ha sido activada', 'succes');
-                this.user.status = 'active'
+                this.user.status = 'active';
+                this.updateLocalStorage();
 
                 this.email = '';
                 this.password = '';
@@ -173,6 +179,10 @@ var app = new Vue({
               
                 
                 }.bind(this), 3000);
+            }
+            else{
+                this.mensaje('El codigo es incorrecto', 'error');
+                return;
             }
         },
 
