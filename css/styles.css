@@ -1,7 +1,6 @@
 body{
 
     background-color: white;
-    background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -100,7 +99,7 @@ header{
     background-color: #fff;
     border: 1px solid #ccc;
     cursor: pointer;
-    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.09);
+
     transition: 0.2s ease;
 }
 
@@ -140,6 +139,9 @@ header{
 #cartelera .card-footer button{
     margin-right: 5px;
 }
+#ticket .modal-footer{
+    background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+}
 
 /* Brayan  */
 #main .carousel-inner img {
@@ -168,48 +170,81 @@ header{
     height: 100%;
 }
 /*/Brayan  */
-
-
+/*Login */
+/* Emerson */
+#bodylogin{
+    background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
+    font-family: 'Oregano', cursive;
+}
 #cardlogin{
-    margin-top: 400px;
+
     margin-top: 150px;
     justify-content: center;
     transition: all;
     width: 1000px;  
     background: rgba(0,0,0,0.15);
-    backdrop-filter: blur(5px);
+    backdrop-filter:     blur(5px);
     box-shadow: 0 25px 45px rgba(0,0,0,0.6);
     border: 1px solid rgba(255,255,255,0.5);
     text-align: center;
-    margin-left: 350px;
+    margin-left: 150px;
     border-radius: 20px;
     }
+    #modalregistrarse{
+        transition: all;
+        background: rgba(0,0,0,0.15);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 25px 45px rgba(0,0,0,0.6); 
+    
+    }
     #cardregistrarse{
-        margin-top: 800px;
-        margin-top: 500px;
+        
         justify-content: center;
         transition: all;
-        width: 500px;  
         background: rgba(0,0,0,0.15);
         backdrop-filter: blur(5px);
         box-shadow: 0 25px 45px rgba(0,0,0,0.6);
+        background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
         border: 1px solid rgba(255,255,255,0.5);
         text-align: center;
-        margin-left: 600px;
         border-radius: 20px;
-        margin-bottom: 200px;
+        
         }
+        
+        #botonregistrarse{
+        margin-top: 12px;   
+        align-items: center;
+        text-align: center;
+        justify-items: center;
+        background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+        
+        }
+       
+        #modalingresarheader{
+            background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
+            
+        }
+       #modalingresarbody{
+        background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
+       }
+       #modalingresarfooter{
+        background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
+        
+       }
+       #modalregistrarsehead{
+        background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
+    }
+       #modalregistrarsefooter{
+        background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
+       }
         #cardcode{
-           
-            margin-top: 50px;
-            justify-content: center;
-            width: 1000px;  
-            background: rgba(190, 190, 207, 0.651);
-
-            border: 1px solid rgba(255, 255, 255, 0.014);
-            text-align: center;
-            margin-left: 720px;
-            border-radius: 20px;
-            margin-bottom: 200px;
+            transition: all;
+            background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
+            box-shadow: 0 25px 45px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.5);
+            text-align: center; 
         }
+
+
+      
 
