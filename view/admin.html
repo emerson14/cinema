@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cinema</title>
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+        crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="icon" href="../img/logocinema.ico">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+    </head>
+    <body class="body2">
+        <div id="app">
+  
+            <!-- HEADER -->
+            <header>
+                <nav id="navbar" class="navbar navbar-expand-lg bg-light navbar-dark">
+                    <div class="container">
+                        <a class="navbar-brand" href="app.html">
+                            <!-- <img src="./img/logo.png" alt="logo"> -->
+                            <span>Cinema</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="app.html">Home</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        configuración
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="" data-bs-target="">Salas</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="" data-bs-target="">Películas</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <!-- /Buttons -->
+            <section class="mt-5 p-5">
+                <button class="btn btn-primary mb-2" >Usuarios</button>
+                <button class="btn btn-primary mb-2">Salas</button>
+                <button class="btn btn-primary mb-2">Películas</button>
+            </section>
+            <!-- /Buttons -->
+            <!-- Table User -->
+            <section v-if="i==0">
+                <div class="container">
+                  <table class="table table-dark table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Opciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row"><span v-text="">Nombre</span> <span v-text="">Apellido</span></th>
+                            <td><span v-text="">email@.com</span></td>
+                            <td><span v-text="">Usuario/empleado</span></td>
+                            <td><span v-text="">Activo/Inactivo</span></td>
+                            <td><button class="btn btn-primary"><span class="material-icons">
+                                edit</span></button>
+                                <button class="btn btn-danger"><span class="material-icons">
+                                    delete_forever</span></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                  </table>
+                </div>
+            </section>
+            <!-- /Table User -->
+            <!-- FOOTER --> 
+            <footer id="footer" class="pb-4 pt-4">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12 col-lg col-md">
+                            <a href="#">FAQ</a>
+                        </div>
+                        <div class="col-12 col-lg col-md">
+                            <a href="#">Contact</a>
+                        </div>
+                        <div class="col-12 col-lg col-md">
+                            <a href="#">Novedades</a>
+                        </div>
+                        <div class="col-12 col-lg col-md">
+                            <a href="#">Privacy</a>
+                        </div>
+                        <div class="col-12 col-lg col-md">
+                            <h6 class="text-center mt-2 mb-2">
+                                Follow us: 
+                                <a href="#"><i class="fab fa-instagram-square"></i></a>
+                                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                            </h6>
+                        </div>
+                    </div>
+                    <h6 class="text-center mt-4">© Copyright - All rights reserved</h6>
+                    <h6 class="text-center mt-4">CINEMA</h6>
+                </div>
+            </footer>
+            <!-- /FOOTER -->
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </body>
+    <script src="../js/vue.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/main.js"></script>
+</html>
