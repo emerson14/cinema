@@ -60,7 +60,7 @@ var app = new Vue({
             release: '14/07/2022',
             duration: '2 hours',
             gender: 'test',
-            img: '../img/thorAmorYTrueno.jpg'
+            img: '../img/thorAmorYTruenoCard.png'
             }
         ],
         confirmPass: '',//para el input de confirmación de contraseña
