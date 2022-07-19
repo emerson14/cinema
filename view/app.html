@@ -25,8 +25,8 @@
                 <nav id="navbar" class="navbar navbar-expand-lg bg-light navbar-dark">
                     <div class="container">
                         <a class="navbar-brand" href="app.html">
-                            <!-- <img src="./img/logo.png" alt="logo"> -->
-                            <span>Cinema</span>
+                             <!-- <img src="./img/logocinema.png" alt="logo">  -->
+                            <span>Cinema </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="app.html">Home</a>
+                                    <a class="nav-link active" aria-current="page" href="app.html">Inicio</a>
                                 </li>
                                 <li class="nav-item dropdown" v-if="user.role === 'admin' || user.role === 'superAdmin'">
                                     <a class="nav-link active" href="admin.html" aria-expanded="page">Configuración</a>
@@ -45,7 +45,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i class="fa-solid fa-right-from-bracket"></i></a>
                                 </li>
-                            </ul>
+                            </ul> 
                         </div>
                     </div>
                 </nav>
@@ -103,7 +103,8 @@
                                 <div class="card-body">                                                                     
                                     <h6 class="card-title">Estreno: <span v-text="item.release"></span></h6>                                    
                                     <h6 class="card-title">Genero: <span v-text="item.gender"></span></h6>                                    
-                                    <h6 class="card-title">Duracion: <span v-text="item.duration"></span></h6>       
+                                    <h6 class="card-title">Duracion: <span v-text="item.duration"></span></h6>
+                                    <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>     
                                     <h6 class="card-title">Sala: <span v-text=""></span></h6>                                 
                                     <h6 class="card-title">Valor ticket: $ <span v-text=""></span></h6>                        
                                 </div>
@@ -156,7 +157,7 @@
                 </div>
             </div>
             <!-- fin modal sillas -->
-            <section>
+            <section id="ticket">
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -208,10 +209,10 @@
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-12 col-lg col-md">
-                            <a href="#">FAQ</a>
+                            <img src="/img/logocinema.png" style="width:150px ;" alt="">
                         </div>
                         <div class="col-12 col-lg col-md">
-                            <a href="#">Contact</a>
+                            <a href="#">Contactar</a>
                         </div>
                         <div class="col-12 col-lg col-md">
                             <a href="#">Novedades</a>
