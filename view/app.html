@@ -36,16 +36,8 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="app.html">Home</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        configuración
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="" data-bs-target="">Salas</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="" data-bs-target="">Películas</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                    </ul>
+                                <li class="nav-item dropdown" v-if="">
+                                    <a class="nav-link active" href="admin.html" aria-expanded="page">configuración</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i class="fa-solid fa-right-from-bracket"></i></a>
@@ -109,7 +101,8 @@
                                     <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                    
                                     <h6 class="card-title">Genero: <span v-text=""></span></h6>                                    
                                     <h6 class="card-title">Duracion: <span v-text=""></span></h6>                                 
-                                    <h6 class="card-title">Valor: $ <span v-text=""></span></h6>                                 
+                                    <h6 class="card-title">Sala: <span v-text=""></span></h6>                                 
+                                    <h6 class="card-title">Valor ticket: $ <span v-text=""></span></h6>                                 
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">

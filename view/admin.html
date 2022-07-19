@@ -147,11 +147,27 @@
                                 <span>Sinopsis</span>                       
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                    <label for="floatingTextarea">escriba sinopsis de la película</label>
+                                </div>
+                                <div>
+                                    <span>Estreno</span>
+                                    <input type="text" class="form-control" id="" placeholder="fecha de estreno">
+                                </div>
+                                <div>
+                                    <span>Valor ticket</span>
+                                    <input type="number" class="form-control" id="" placeholder="valor ticket">
+                                </div>
+                                <div>
+                                    <span>Sala</span>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected>Seleccione una sala</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>                                   
                                 </div>   
                                 <div class="mb-3">
                                     <label class="form-label">Imagen de la película</label>
-                                    <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly>
+                                    <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly v-model="pelisImg">
                                     <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"  data-bs-target="#modalseleccionar">
                                         Seleccionar imagen
                                     </button>
@@ -180,28 +196,28 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
                                                 <img src="../img/minions2Card.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/minions2Card.jpg')">
                                                 <div class="card-body">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
                                                 <img src="../img/buzzlLightyearCard.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/buzzlLightyearCard.jpg')">
                                                 <div class="card-body">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
                                                 <img src="../img/thorAmorYTruenoCard.png" class="card-img-top" alt="selectimg" @click="selectimg('../img/thorAmorYTruenoCard.png')">
                                                 <div class="card-body">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
                                                 <img src="../img/jurassincWorldCard.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/jurassincWorldCard.jpg')">
                                                 <div class="card-body">
                                                 </div>
@@ -252,11 +268,13 @@
                         <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
                                 <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
-                                <div class="card-body">                                                                     
-                                    <h6 class="card-title">Nombre: <span v-text=""></span></h6>                                    
+                                <div class="card-body">                                                                                                     
                                     <h6 class="card-title">Género: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                                                    
                                     <h6 class="card-title">Duración: <span v-text=""></span></h6>                                                                    
                                     <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Sala: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Valor ticket: <span v-text=""></span></h6>                                                                    
                                 </div>
                             </div>
                             <hr>
