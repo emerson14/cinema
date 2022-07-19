@@ -25,7 +25,7 @@
                 <nav id="navbar" class="navbar navbar-expand-lg bg-light navbar-dark">
                     <div class="container">
                         <a class="navbar-brand" href="app.html">
-                            <!-- <img src="./img/logo.png" alt="logo"> -->
+                            <img src="../img/logocinema.png" alt="logo">
                             <span>Cinema</span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        configuración
+                                        Configuración
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="" data-bs-target="">Salas</a></li>
@@ -150,6 +150,77 @@
                     </div>
                 </section>
                 <!--  /Modal agg usuario-->
+                <!-- Modal Edit usuario -->
+                <section>
+                    <!-- Modal -->
+                    <div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuario</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="form-floating mb-3 col-sm-6">
+                                                <input id="floatingInput" type="text" class="form-control" placeholder="Nombre">
+                                                <label for="floatingInput" class="ms-2">Email address</label>
+                                            </div>
+                                            <div class="form-floating mb-3 col-sm-6">
+                                                <input type="text" class="form-control" placeholder="Apellido">
+                                                <label for="floatingInput" class="ms-2">Apellido</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Direccion">
+                                                <label for="floatingInput" class="ms-2">Dirección</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control" placeholder="Telefono">
+                                                <label for="floatingInput" class="ms-2">Telefono</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="email" class="form-control" placeholder="Email" required>
+                                                <label for="floatingInput" class="ms-2">Email</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Usuario">
+                                                <label for="floatingInput" class="ms-2">Usuario</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Pin">
+                                                <label for="floatingInput" class="ms-2">Pin Anterior</label>
+                                            </div>
+                                            <div class="form-floating mb-3 col-sm-6">
+                                                <input type="text" class="form-control" placeholder="Pin">
+                                                <label for="floatingInput" class="ms-2">Nuevo Pin</label>
+                                            </div>
+                                            <div class="form-floating mb-3 col-sm-6">
+                                                <input type="text" class="form-control" placeholder="Confirmar Pin">
+                                                <label for="floatingInput" class="ms-2">Confirmar Pin</label>
+                                            </div>
+                                            <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ESTADO-->
+                                            <div class="container">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Estado</option>
+                                                    <option value="1">Activo</option>
+                                                    <option value="2">Inactivo</option>
+                                                </select>
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-warning">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--  /Modal Edit usuario-->
             </section>
             <!-- /Table User -->
             <!-- modalSalas -->
@@ -196,11 +267,7 @@
                                 </div>
                                 <div>
                                     <span>Género</span>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected>Seleccione un género</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select form-select-sm" placeholder="seleccione un género" aria-label=".form-select-sm example" :options="arrayData">
                                     </select>                                   
                                 </div>
                                 <div>
@@ -221,11 +288,7 @@
                                 </div>
                                 <div>
                                     <span>Sala</span>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected>Seleccione una sala</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select form-select-sm" placeholder="seleccione una sala"  aria-label=".form-select-sm example" :options="arraData" >
                                     </select>                                   
                                 </div>   
                                 <div class="mb-3">
