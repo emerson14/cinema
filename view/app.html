@@ -119,6 +119,44 @@
                     </div>
                 </div>
             </section>
+            <!-- inicio modal sillas -->
+            <div class="modal fade" id="sillas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Puestos Disponibles Sala 1:</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row mx-auto">
+                                    <ul>
+                                        <li class="col-2" v-for="(item, index) in rooms[rpos].chairs" :key="index">
+                                            <div v-if="item.status === 'available' && nTickets > 0">
+                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item,index)">
+                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                            </div>
+                                            <div class="disabled" v-else>
+                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" disabled>
+                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row"><button type="button" class="btn btn-dark col-12 my-2">Pantalla</button></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" id="footerModal">
+                            <div class="mx-auto">
+                                <button type="button" class="btn btn-primary" @click="goToPay" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="nTickets == 0">Comprar</button>
+                                <button type="button" class="btn btn-primary" @click="goToPay" v-else>Comprar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Regresar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fin modal sillas -->
             <section id="ticket">
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
