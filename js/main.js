@@ -76,6 +76,9 @@ var app = new Vue({
             { number: 4, status: 'available' }
         ],}
         ],
+        newRoom: {
+            roomCode: '', chairs: [], amountChairs: 0,
+        },
         confirmPass: '',//para el input de confirmación de contraseña
         email: '',
         password: '',
@@ -129,6 +132,22 @@ var app = new Vue({
         addMovie(){//agrega la nueva pelicula en el arreglo de peliculas disponibles (movies)
             //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
             this.movies.push({...this.newMovie});
+        },
+        addRoom(){
+            if(this.newRoom.roomCode.length && this.newRoom.amountChairs > 0) {
+                this.rooms.push({...this.newRoom});
+                if(this.newRoom.amountChairs > 0){
+                    for (let i = 1; i <= this.newRoom.amountChairs; i++) {
+                        this.rooms[this.rooms.length - 1].chairs.push({number: i, status: 'available'});
+                    }
+                    this.newRoom.roomCode = '';
+                    this.newRoom.amountChairs = 0;
+                    this.updateLocalStorage();
+                    this.mensaje('Sala creada', 'success');
+                }
+            }else{
+                this.mensaje('Ingrese todos los campos', 'error');
+            }
         },
         login(){
 

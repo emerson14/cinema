@@ -75,7 +75,7 @@
                             <td v-if="item.status == 'active'" class="text-success"><span v-text="item.status">estado</span></td>
                             <td v-if="item.status == 'inactive'" class="text-danger"><span v-text="item.status">estado</span></td>
                             <td>
-                                <button class="btn btn-primary"><span class="material-icons">edit</span></button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><span class="material-icons">edit</span></button>
                                 <button class="btn btn-danger" v-if="item.role !== 'superAdmin'"><span class="material-icons">delete_forever</span></button>
                             </td>
                           </tr>
@@ -227,16 +227,16 @@
                             <div class="modal-body">
                                 <div>
                                     <span>Nombre</span>
-                                    <input type="text" class="form-control" id="" placeholder="nombre de la sala">
+                                    <input type="text" class="form-control" id="" placeholder="nombre de la sala" v-model="newRoom.roomCode">
                                 </div>
                                 <div>
                                     <span>Cantidad Asientos</span>
-                                    <input type="number" class="form-control" id="" placeholder="número de asientos">
+                                    <input type="number" class="form-control" id="" placeholder="número de asientos" v-model="newRoom.amountChairs">
                                 </div>                          
                             </div>
                             <div class="modal-footer" id="footerModal">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-warning">Guardar</button>
+                                <button type="button" class="btn btn-warning" @click="addRoom">Guardar</button>
                             </div>
                         </div>
                     </div>
