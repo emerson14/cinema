@@ -36,8 +36,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="app.html">Home</a>
                                 </li>
-                                <li class="nav-item dropdown" v-if="">
-                                    <a class="nav-link active" href="admin.html" aria-expanded="page">configuración</a>
+                                <li class="nav-item dropdown" v-if="user.role === 'admin' || user.role === 'superAdmin'">
+                                    <a class="nav-link active" href="admin.html" aria-expanded="page">Configuración</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page">Bienvenido: <span v-text="user.name" class="text-primary"></span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i class="fa-solid fa-right-from-bracket"></i></a>
