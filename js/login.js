@@ -139,10 +139,8 @@ var app = new Vue({
             
             if(this.seconds != 0){
                 this.seconds -= 1;
-                console.log(this.seconds);
             }else{
                 this.seconds = 30;
-                console.log(this.seconds);
             }
         },
         validateCode(){

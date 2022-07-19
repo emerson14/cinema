@@ -65,10 +65,11 @@ var app = new Vue({
             { number: 4, status: 'available' }
         ],}
         ],
-      
-       
+        newRoom: {
+            roomCode: '', chairs: [], amountChairs: 0,
+        },
         user: null,
-       
+        confirmPass: '',
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
@@ -109,7 +110,25 @@ var app = new Vue({
             //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
             this.movies.push({...this.newMovie});
         },
-       
+        addRoom(){
+            if(this.newRoom.roomCode.length && this.newRoom.amountChairs > 0) {
+                this.rooms.push({...this.newRoom});
+                this.rooms[this.rooms.length - 1].roomCode = this.rooms[this.rooms.length - 1].roomCode.toUpperCase();
+                if(this.newRoom.amountChairs > 0){
+                    for (let i = 1; i <= this.newRoom.amountChairs; i++) {
+                        this.rooms[this.rooms.length - 1].chairs.push({number: i, status: 'available'});
+                    }
+                    this.newRoom.roomCode = '';
+                    this.newRoom.amountChairs = 0;
+                    this.updateLocalStorage();
+                    this.mensaje('Sala creada', 'success');
+                }else{
+                    this.mensaje('La cantidad de sillas debe ser mayor a cero', 'error');
+                }
+            }else{
+                this.mensaje('Ingrese todos los campos', 'error');
+            }
+        },
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
