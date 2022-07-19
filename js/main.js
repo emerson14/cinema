@@ -124,7 +124,7 @@ var app = new Vue({
                 password: '',
                 status: 'inactive',
             }
-            this.confirmpass = '';
+            this.confirmPass = '';
         },
         addMovie(){//agrega la nueva pelicula en el arreglo de peliculas disponibles (movies)
             //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
@@ -141,6 +141,7 @@ var app = new Vue({
 
                 if(this.email == user.email && this.password == user.password){
                     this.user = user;
+                    this.updateLocalStorage();
                 }
                 
             });

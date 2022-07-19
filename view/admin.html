@@ -60,7 +60,7 @@
             </section>
             <!-- /Buttons -->
             <!-- Table User -->
-            <section v-if="i==0">
+            <section v-if="user.role == 'superAdmin'">
                 <div class="container p-3">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span class="material-icons"> person_add_alt</span></button>
                 </div>
@@ -70,21 +70,21 @@
                           <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Cargo</th>
+                            <th scope="col">Rol</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Opciones</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row"><span v-text="">Nombre</span> <span v-text="">Apellido</span></th>
-                            <td><span v-text="">email@.com</span></td>
-                            <td><span v-text="">Usuario/empleado</span></td>
-                            <td><span v-text="">Activo/Inactivo</span></td>
-                            <td><button class="btn btn-primary"><span class="material-icons">
-                                edit</span></button>
-                                <button class="btn btn-danger"><span class="material-icons">
-                                    delete_forever</span></button>
+                          <tr  v-for="(item, index) in users" :key="index">
+                            <td v-text="`${item.name} ${item.lastName}`"></td>
+                            <td><span v-text="item.email">email@.com</span></td>
+                            <td><span v-text="item.role">Usuario/empleado</span></td>
+                            <td v-if="item.status == 'active'" class="text-success"><span v-text="item.status">estado</span></td>
+                            <td v-if="item.status == 'inactive'" class="text-danger"><span v-text="item.status">estado</span></td>
+                            <td>
+                                <button class="btn btn-primary"><span class="material-icons">edit</span></button>
+                                <button class="btn btn-danger" v-if="item.role !== 'superAdmin'"><span class="material-icons">delete_forever</span></button>
                             </td>
                           </tr>
                         </tbody>
@@ -104,42 +104,38 @@
                             <div class="container">
                               <div class="row">
                                   <div class="form-floating mb-3 col-sm-6">
-                                    <input id="floatingInput" type="text" class="form-control" placeholder="Nombre">
-                                    <label for="floatingInput" class="ms-2">Email address</label>
+                                    <input id="floatingInput" type="text" class="form-control" placeholder="Nombre" v-model="newUser.name">
+                                    <label for="floatingInput" class="ms-2">Nombre</label>
                                   </div>
                                   <div class="form-floating mb-3 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Apellido">
+                                    <input type="text" class="form-control" placeholder="Apellido" v-model="newUser.lastName">
                                     <label for="floatingInput" class="ms-2">Apellido</label>
                                   </div>
                                   <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" placeholder="Direccion">
+                                    <input type="text" class="form-control" placeholder="Direccion" v-model="newUser.address">
                                     <label for="floatingInput" class="ms-2">Dirección</label>
                                   </div>
                                   <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" placeholder="Telefono">
+                                    <input type="number" class="form-control" placeholder="Telefono" v-model="newUser.phoneNumber">
                                     <label for="floatingInput" class="ms-2">Telefono</label>
                                   </div>
                                   <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" required>
+                                    <input type="email" class="form-control" placeholder="Email" required v-model="newUser.email">
                                     <label for="floatingInput" class="ms-2">Email</label>
                                   </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" placeholder="Usuario">
-                                    <label for="floatingInput" class="ms-2">Usuario</label>
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input type="password" class="form-control" placeholder="Password" v-model="newUser.password">
+                                    <label for="floatingInput" class="ms-2">Contraseña</label>
                                   </div>
                                   <div class="form-floating mb-3 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Pin">
-                                    <label for="floatingInput" class="ms-2">Pin</label>
-                                  </div>
-                                  <div class="form-floating mb-3 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Confirmar Pin">
-                                    <label for="floatingInput" class="ms-2">Confirmar Pin</label>
+                                    <input type="text" class="form-control" placeholder="Confirmar Pin" v-model="confirmPass">
+                                    <label for="floatingInput" class="ms-2">Confirmar contraseña</label>
                                   </div>
                                   <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
-                                  <select class="form-select" aria-label="Default select example">
+                                  <select class="form-select" aria-label="Default select example" v-model="newUser.role">
                                     <option selected>Seleccione el rol</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Cajero</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="user">Usuario</option>
                                   </select>
                                       
                               </div>
@@ -147,7 +143,7 @@
                             </div>
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-primary" @click="addUser">Guardar</button>
                             </div>
                         </div>
                         </div>
