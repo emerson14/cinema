@@ -254,5 +254,44 @@ header{
         }
 
 
-      
+#sillas ul {
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+#sillas li{
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 10px;
+    float: left;
+}
+
+#sillas input[type="checkbox"]:not(:checked), 
+#sillas input[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999%;
+}
+
+#sillas input[type="checkbox"] + label {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+#sillas input[type="checkbox"]:checked + label {
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+}
+
+#sillas .disabled input[type="checkbox"] + label{
+    border: 1px solid white;
+    color: white;
+    background-color: gray;
+}
 

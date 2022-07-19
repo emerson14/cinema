@@ -23,22 +23,22 @@
     <div class="card row"  id="cardlogin" >
             <div class="abs-center"  >
                 <div class="card-body">
-                <img src="/cinema/img/logocinema.png" style="width:300px;" alt="">
+                <img src="../img/logocinema.ico" style="width:300px;" alt="">
                 <h1 class="mb-3">Iniciar Sesión</h1>
                 <div class="form-floating mb-3">
                   <span>email:</span>
                   <!-- v-model asignar a estos campo EMAIL  -->
-                  <input type="text"  class="form-control" >
+                  <input type="text"  class="form-control" v-model="email">
                 </div>
                 <div class="form-floating mb-3">
                   <span>Contraseña:</span>
                    <!-- v-model asignar a estos campo EMAIL al imput -->
-                  <input type="password" name="password" id="password" class="form-control" >
+                  <input type="password" name="password" id="password" class="form-control" v-model="password" @keyup.enter="login">
                 </div>
                 <!-- boton ingresar vacio  -->
-                <button type="submit" class="btn btn-primary" >Ingresar</button>
+                <button type="submit" class="btn btn-primary" @click="login">Ingresar</button>
                 <!-- boton ingrsar con validar codigo -->
-                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalcode" >Ingresar</button>
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalcode" hidden id="code"></button>
 
 <div>
   <button type="submit" class="btn btn-primary" id="botonregistrarse" data-bs-toggle="modal" data-bs-target="#modalregistrarse" > ¿Aun no tienes cuenta? ¡Registrate aqui!</button>
@@ -62,44 +62,39 @@
        <div class="card"  id="cardregistrarse">
         <div class="abs-center"  >
             <div class="card-body">
-            <img src="/cinema/img/logocinema.png"  alt="" style="width:300px;">
+            <img src="../img/logocinema.png"  alt="" style="width:300px;">
             <h1 class="mb-3">Crear cuenta</h1>
             <div class="form-floating mb-3">
              <span>Nombre</span>
              <!-- nombre -->
-              <input type="text"   v-model="i" class="form-control"  >
+              <input type="text" class="form-control"  v-model="newUser.name">
             </div>
             <div class="form-floating mb-3">
               <span>Apellidos</span>
-               <input type="text"  class="form-control" >
+               <input type="text"  class="form-control" v-model="newUser.lastName">
              </div>
              <div class="form-floating mb-3">
-              <span>Dirección:</span>
-               <input type="text"  class="form-control" >
+              <span>Direccion:</span>
+               <input type="text"  class="form-control" v-model="newUser.address">
              </div>
              <div class="form-floating mb-3">
-              <span>Teléfono:</span>
-               <input type="text"  class="form-control" >
+              <span>Telefono</span>
+               <input type="text"  class="form-control" v-model="newUser.phoneNumber">
              </div>
              <div class="form-floating mb-3">
-              <span>email:</span>
-               <input type="text"  class="form-control" >
+              <span>email</span>
+               <input type="text" class="form-control" v-model="newUser.email">
              </div>
             <div class="form-floating mb-3">
-              <span>Usuario:</span>
-              <input type="text"  class="form-control" >
+              <span>Contraseña </span>
+              <input type="password"  class="form-control" v-model="newUser.password">
             </div>
             <div class="form-floating mb-3">
-              <span>Contraseña: </span>
-              <!-- aca va estar asignada la variable contraseña -->
-              <input type="text"  class="form-control" >
-            </div>
-            <div class="form-floating mb-3">
-              <span>Confirmar Contraseña:</span>
-              <input  type="password" name="password" id="password" class="form-control" >
+              <span>Confirmar Contraseña</span>
+              <input @keyup.enter="addUser" type="password" name="password" id="password2" class="form-control" v-model="confirmPass">
             </div>
             <div >
-            <button type="submit" class="btn btn-primary" >Registrarse</button>
+            <button type="submit" class="btn btn-primary" @click="addUser">Registrarse</button>
           </div>
           
             <div style="margin-top: 15px;">
@@ -129,16 +124,16 @@
           <div class="card" id="cardcode" >
               <div class="card-body" > 
                 <h5 class="card-title">Codigo de confirmacion</h5>
+                <h5 class="text-center text-danger">Nuevo código en: <strong>00</strong>:<strong v-if="seconds < 10">0</strong><strong v-text="seconds"></strong></h5>
                 <p class="card-text">Le hemos enviado un codigo confirmacion, por favor digitelo:</p>
-                <input    class="form-control" >
-                <button type="button" id="botonnuevocodigo" class="btn btn-warning">Reenviar Nuevo codigo</button>
+                <input    class="form-control" @keyp.enter="validateCode" v-model="confirmCode">
+                <a href="#" class="card-link">Reenviar Nuevo Codido</a>
               </div>
               </div>
             </div>    
             </div>
       <div class="modal-footer" id="modalingresarfooter">
-        <button type="submit" data-bs-dismiss="modal" class="btn btn-primary" >Cerrar</button>
-        <button type="submit" class="btn btn-primary" >Validar</button>
+        <button type="submit" class="btn btn-primary" @click="validateCode">Continuar</button>
       </div>
     </div>
   </div>

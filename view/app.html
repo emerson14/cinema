@@ -36,8 +36,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="app.html">Inicio</a>
                                 </li>
-                                <li class="nav-item dropdown" v-if="">
+                                <li class="nav-item dropdown" v-if="user.role === 'admin' || user.role === 'superAdmin'">
                                     <a class="nav-link active" href="admin.html" aria-expanded="page">Configuración</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page">Bienvenido: <span v-text="user.name" class="text-primary"></span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i class="fa-solid fa-right-from-bracket"></i></a>
@@ -93,20 +96,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
+                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in movies" :key="index">
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                                <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/no-dormira-s-1633081278.jpeg?crop=1xw:1xh;center,top&resize=480:*" class="card-img-top" alt="">
-                                <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
+                                <img :src="item.img" class="card-img-top" alt="">
+                                <h5 class="text-center"><strong v-text="item.title"></strong></h5>
                                 <div class="card-body">                                                                     
-                                    <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                    
-                                    <h6 class="card-title">Genero: <span v-text=""></span></h6>                                    
-                                    <h6 class="card-title">Duracion: <span v-text=""></span></h6>                                 
+                                    <h6 class="card-title">Estreno: <span v-text="item.release"></span></h6>                                    
+                                    <h6 class="card-title">Genero: <span v-text="item.gender"></span></h6>                                    
+                                    <h6 class="card-title">Duracion: <span v-text="item.duration"></span></h6>       
                                     <h6 class="card-title">Sala: <span v-text=""></span></h6>                                 
-                                    <h6 class="card-title">Valor ticket: $ <span v-text=""></span></h6>                                 
+                                    <h6 class="card-title">Valor ticket: $ <span v-text=""></span></h6>                        
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning" @click="">Comprar ticket</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning">Comprar ticket</button>
                                     </div> 
                                 </div>
                             </div>
@@ -115,40 +118,86 @@
                     </div>
                 </div>
             </section>
+            <!-- inicio modal sillas -->
+            <div class="modal fade" id="sillas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Puestos Disponibles Sala 1:</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row mx-auto">
+                                    <ul>
+                                        <li class="col-2" v-for="(item, index) in rooms[rpos].chairs" :key="index">
+                                            <div v-if="item.status === 'available' && nTickets > 0">
+                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item,index)">
+                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                            </div>
+                                            <div class="disabled" v-else>
+                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" disabled>
+                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row"><button type="button" class="btn btn-dark col-12 my-2">Pantalla</button></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" id="footerModal">
+                            <div class="mx-auto">
+                                <button type="button" class="btn btn-primary" @click="goToPay" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="nTickets == 0">Comprar</button>
+                                <button type="button" class="btn btn-primary" @click="goToPay" v-else>Comprar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Regresar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fin modal sillas -->
             <section>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel" v-text="">titulo pelicula</h5>
+                                <h5 class="modal-title" id="exampleModalLabel" v-text="">Boletería</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">                   
-                                <input type="number" class="form-control" id="" placeholder="Cantidad de tickets">
-                                <h6 class="text-center">SELECCIONA TU MÉTODO DE PAGO</h6>
-                                <div class="d-flex justify-content-center mt-3">
-
-                                    <div class="col-1 d-flex align-items-center ">
-                                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="1" v-model="pago">
-                                    </div>
-
-                                    <div class="col-4 align-items-end">
-                                      <img src="/img/nequi.svg" alt="" style="width: 200px; height: 50px;" class="align-items-end">
-                                    </div>
+                            <div class="modal-body">
+                                <div v-if="openPayment == false">
+                                    <p>Seleccione la sala</p>
+                                    <select class="form-select" v-model="option" @change="getRoomIndex">
+                                        <option v-for="(item, index) in rooms" :key="index" :value="item.roomCode" v-text="item.roomCode">Sala 1</option>
+                                    </select>
+                                    <input type="number" class="form-control mt-2" id="" placeholder="Cantidad de tickets" v-if="option.length > 0" v-model="nTickets">
+                                    <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#sillas" v-if="option.length > 0 && nTickets > 0">Elija un puesto</button>
                                 </div>
-                                <div class="d-flex justify-content-center mt-3">
-                                    <div class="col-1 d-flex align-items-center ">
-                                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="2"
-                                        v-model="pago">
+                                <div v-if="openPayment == true">
+                                    <h6 class="text-center">SELECCIONA TU MÉTODO DE PAGO</h6>
+                                    <div class="d-flex justify-content-center mt-3">
+
+                                        <div class="col-1 d-flex align-items-center ">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexR1" value="nequi" v-model="pMethod">
+                                        </div>
+
+                                        <div class="col-4 align-items-end">
+                                            <label for="flexR1"><img src="../img/nequi.svg" alt="" style="width: 200px; height: 50px;" class="align-items-end"></label>
+                                        </div>
                                     </div>
-                                    <div class="col-4 align-items-end">
-                                      <img src="/img/mastercard.svg" alt="" style="width: 200px; height: 50px;" class="align-items-end">
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="col-1 d-flex align-items-center ">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexR2" value="mc" v-model="pMethod">
+                                        </div>
+                                        <div class="col-4 align-items-end">
+                                            <label for="flexR2"><img src="../img/mastercard.svg" alt="" style="width: 200px; height: 50px;" class="align-items-end"></label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>                               
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Pagar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" v-if="openPayment == true" @click="saveChairStatus">Pagar</button>
                             </div>
                         </div>
                     </div>
