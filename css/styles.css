@@ -281,3 +281,9 @@ header{
     background-color: black;
 }
 
+#sillas .disabled input[type="checkbox"] + label{
+    border: 1px solid white;
+    color: white;
+    background-color: gray;
+}
+
