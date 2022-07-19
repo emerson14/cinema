@@ -55,8 +55,8 @@
             <!-- /Buttons -->
             <section class="mt-5 p-5">
                 <button class="btn btn-primary mb-2" >Usuarios</button>
-                <button class="btn btn-primary mb-2">Salas</button>
-                <button class="btn btn-primary mb-2">Películas</button>
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#salas">Salas</button>
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#pelis">Películas</button>
             </section>
             <!-- /Buttons -->
             <!-- Table User -->
@@ -156,6 +156,182 @@
                 <!--  /Modal agg usuario-->
             </section>
             <!-- /Table User -->
+            <!-- modalSalas -->
+            <section>
+                <div class="modal fade" id="salas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">SALAS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <span>Nombre</span>
+                                    <input type="text" class="form-control" id="" placeholder="nombre de la sala">
+                                </div>
+                                <div>
+                                    <span>Cantidad Asientos</span>
+                                    <input type="number" class="form-control" id="" placeholder="número de asientos">
+                                </div>                          
+                            </div>
+                            <div class="modal-footer" id="footerModal">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-warning">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- finalModalSalas -->
+            <!-- modalPelicula -->
+            <section>
+                <div class="modal fade" id="pelis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">PELÍCULAS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <span>Nombre</span>
+                                    <input type="text" class="form-control" id="" placeholder="nombre de la película">
+                                </div>
+                                <div>
+                                    <span>Género</span>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected>Seleccione un género</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>                                   
+                                </div>
+                                <div>
+                                    <span>Duración</span>
+                                    <input type="text" class="form-control" id="" placeholder="tiempo de duración">
+                                </div>   
+                                <span>Sinopsis</span>                       
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                    <label for="floatingTextarea">escriba sinopsis de la película</label>
+                                </div>   
+                                <div class="mb-3">
+                                    <label class="form-label">Imagen de la película</label>
+                                    <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly>
+                                    <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"  data-bs-target="#modalseleccionar">
+                                        Seleccionar imagen
+                                    </button>
+                                    <span v-if=""><strong class="text-center text-danger">Este campo es requerido</strong></span>
+                                </div>                     
+                            </div>
+                            <div class="modal-footer" id="footerModal">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-warning">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- finalModalPeliculas -->
+            <section id="cardPelis">
+                <!-- Modal seleccionar imagenes-->
+                <div class="modal fade" id="modalseleccionar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h5 class="modal-title text-center" id="exampleModalLabel">Seleccionar Imagen</h5>
+                                <button type="button" class="btn btn-dark back" data-bs-toggle="modal"  data-bs-target="#pelis">Regresar <i class="fa-solid fa-rotate-left"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/minions2Card.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/minions2Card.jpg')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/buzzlLightyearCard.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/buzzlLightyearCard.jpg')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/thorAmorYTruenoCard.png" class="card-img-top" alt="selectimg" @click="selectimg('../img/thorAmorYTruenoCard.png')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/jurassincWorldCard.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/jurassincWorldCard.jpg')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Modal seleccionar imagenes-->
+            </section>
+            <!-- CardlSalas -->
+            <section id="cartelera" class="mt-4" v-if="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center text-uppercase">
+                            <h1 class="menu-title">Salas</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
+                            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                                <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
+                                <div class="card-body">                                                                     
+                                    <h6 class="card-title">Nombre: <span v-text=""></span></h6>                                    
+                                    <h6 class="card-title">No. Asientos: <span v-text=""></span></h6>                                                                    
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- finalCardSalas -->
+            <!-- CardPeliculas -->
+            <section id="cartelera" class="mt-4" v-if="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center text-uppercase">
+                            <h1 class="menu-title">PELÍCULAS</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
+                            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                                <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
+                                <div class="card-body">                                                                     
+                                    <h6 class="card-title">Nombre: <span v-text=""></span></h6>                                    
+                                    <h6 class="card-title">Género: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Duración: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>                                                                    
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FinCardPeliculas -->
             <!-- FOOTER --> 
             <footer id="footer" class="pb-4 pt-4">
                 <div class="container">
