@@ -34,18 +34,11 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="app.html">Home</a>
+                                    <a class="nav-link active" aria-current="page" href="app.html">Inicio</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Configuración
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="" data-bs-target="">Salas</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#" data-bs-toggle="" data-bs-target="">Películas</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                    </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i
+                                            class="fa-solid fa-right-from-bracket"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -54,7 +47,6 @@
             </header>
             <!-- /Buttons -->
             <section class="mt-5 p-5">
-                <button class="btn btn-primary mb-2" >Usuarios</button>
                 <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#salas">Salas</button>
                 <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#pelis">Películas</button>
             </section>
@@ -267,7 +259,11 @@
                                 </div>
                                 <div>
                                     <span>Género</span>
-                                    <select class="form-select form-select-sm" placeholder="seleccione un género" aria-label=".form-select-sm example" :options="arrayData">
+                                    <select class="form-select form-select-sm"aria-label=".form-select-sm example">
+                                        <option selected>Seleccione una opción</option>
+                                        <option value="1">Terror</option>
+                                        <option value="2">Comedia</option>
+                                        <option value="3">Ciencia ficción</option>
                                     </select>                                   
                                 </div>
                                 <div>
@@ -288,7 +284,11 @@
                                 </div>
                                 <div>
                                     <span>Sala</span>
-                                    <select class="form-select form-select-sm" placeholder="seleccione una sala"  aria-label=".form-select-sm example" :options="arraData" >
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected>Seleccione una opción</option>
+                                        <option value="1">data</option>
+                                        <option value="2">data</option>
+                                        <option value="3">data</option>
                                     </select>                                   
                                 </div>   
                                 <div class="mb-3">
