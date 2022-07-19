@@ -47,19 +47,20 @@ header{
     height: 50px;
 }
 
-#navbar .navbar-brand span{
-    /* border: 3px solid #fff; */
-    color: #000;
+#navbar span{
+    color: #ffff;
     font-weight: bold;
 }
-
-#navbar a{
+#navbar span:hover {
     color: #000;
+}
+#navbar a{
+    color: #ffff;
     font-weight: bold;
 }
 
 #navbar a:hover{
-    color: #fff;
+    color: #000;
 }
 
 #navbar .logout:hover{
