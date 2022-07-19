@@ -70,6 +70,8 @@ var app = new Vue({
         code: '',
         confirmCode: '',
         genCode: '',
+        startTimer: '',
+        seconds: 30,
 
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
@@ -134,11 +136,18 @@ var app = new Vue({
             else{
                 if(this.user.status == 'inactive' ){
 
-                    this.genCode = setInterval(this.generateCode(), 5000);
                     const genCode2 = () => {
-                        this.generateCode()
+                        this.generateCode();
                     }
-                    const myInterval = setInterval(genCode2, 5000);
+
+                    const myTimer = () => {
+                        this.timer();
+                    }
+
+                    this.genCode = setInterval(genCode2, 30000);
+                    this.startTimer = setInterval(myTimer, 1000);
+                   
+
                     //se abre la modal y ese boton redirige a una nueva funcion 'validateCode'
                     btn = document.getElementById('code');
                     btn.click();
@@ -160,7 +169,16 @@ var app = new Vue({
             }
 
         },
-
+        timer(){
+            
+            if(this.seconds != 0){
+                this.seconds -= 1;
+                console.log(this.seconds);
+            }else{
+                this.seconds = 30;
+                console.log(this.seconds);
+            }
+        },
         validateCode(){
 
             if(this.code == ''){
@@ -170,6 +188,8 @@ var app = new Vue({
             }
             if(this.code == this.confirmCode){
                 clearInterval(this.genCode);
+                clearInterval(this.startTimer);
+                this.startTimer = '',
                 this.mensaje('Su cuenta ha sido activada', 'succes');
                 this.user.status = 'active';
                 this.updateLocalStorage();
