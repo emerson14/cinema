@@ -144,6 +144,8 @@ var app = new Vue({
                     this.newRoom.amountChairs = 0;
                     this.updateLocalStorage();
                     this.mensaje('Sala creada', 'success');
+                }else{
+                    this.mensaje('La cantidad de sillas debe ser mayor a cero', 'error');
                 }
             }else{
                 this.mensaje('Ingrese todos los campos', 'error');
