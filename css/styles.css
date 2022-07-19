@@ -142,6 +142,9 @@ header{
 #ticket .modal-footer{
     background: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
 }
+#cardPelis .card:hover{
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+}
 
 /* Brayan  */
 #main .carousel-inner img {
@@ -174,20 +177,21 @@ header{
 /* Emerson */
 #bodylogin{
     background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); 
-    font-family: 'Oregano', cursive;
+    font-family: 'Zen Dots', cursive;
+
 }
 #cardlogin{
 
     margin-top: 150px;
     justify-content: center;
     transition: all;
-    width: 1000px;  
+    width: 70%;
+    left: 15%;
     background: rgba(0,0,0,0.15);
     backdrop-filter:     blur(5px);
     box-shadow: 0 25px 45px rgba(0,0,0,0.6);
     border: 1px solid rgba(255,255,255,0.5);
     text-align: center;
-    margin-left: 150px;
     border-radius: 20px;
     }
     #modalregistrarse{
@@ -218,6 +222,9 @@ header{
         justify-items: center;
         background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
         
+        }
+        #botonnuevocodigo{
+            margin-top: 10px;
         }
        
         #modalingresarheader{

@@ -11,7 +11,7 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
         crossorigin="anonymous"
         />
-      
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="../css/styles.css">
         <link rel="icon" href="../img/logocinema.ico">
@@ -19,8 +19,8 @@
     <body id="bodylogin"> 
        <!-- CARD lOGIN -->
 
-       <div id="app" class="container col-12" >
-    <div class="card abs-center "  id="cardlogin" >
+       <div id="app" class="container" >
+    <div class="card row"  id="cardlogin" >
             <div class="abs-center"  >
                 <div class="card-body">
                 <img src="../img/logocinema.ico" style="width:300px;" alt="">
@@ -99,7 +99,8 @@
           </div>
           
             <div style="margin-top: 15px;">
-            <span><a href="#cardlogin" style="color:#ffff ;">¿Ya tienes cuenta? Inicia secion</a> </span>
+
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">¿Ya tienes cuenta? Inicia sesión</button>
           </div>
           </div>
         </div>
@@ -116,7 +117,7 @@
   <div class="modal-dialog">
     <div class="modal-content" >
       <div class="modal-header" id="modalingresarheader">
-        <h5 class="modal-title" id="exampleModalLabel">Codigo de confirmacion</h5>
+        <h5 class="modal-title" id="exampleModalLabel"  >Codigo de confirmación</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalingresarbody"  >
