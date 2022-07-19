@@ -25,8 +25,8 @@
                 <nav id="navbar" class="navbar navbar-expand-lg bg-light navbar-dark">
                     <div class="container">
                         <a class="navbar-brand" href="app.html">
-                            <img src="../img/logocinema.png" alt="logo">
-                            <span text>Cinema</span>
+                             <!-- <img src="./img/logocinema.png" alt="logo">  -->
+                            <span>Cinema </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="app.html">Home</a>
+                                    <a class="nav-link active" aria-current="page" href="app.html">Inicio</a>
                                 </li>
                                 <li class="nav-item dropdown" v-if="">
                                     <a class="nav-link active" href="admin.html" aria-expanded="page">Configuración</a>
@@ -42,7 +42,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i class="fa-solid fa-right-from-bracket"></i></a>
                                 </li>
-                            </ul>
+                            </ul> 
                         </div>
                     </div>
                 </nav>
@@ -98,10 +98,12 @@
                                 <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/no-dormira-s-1633081278.jpeg?crop=1xw:1xh;center,top&resize=480:*" class="card-img-top" alt="">
                                 <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
                                 <div class="card-body">                                                                     
-                                    <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                    
-                                    <h6 class="card-title">Genero: <span v-text=""></span></h6>                                    
-                                    <h6 class="card-title">Duracion: <span v-text=""></span></h6>                                 
-                                    <h6 class="card-title">Valor: $ <span v-text=""></span></h6>                                 
+                                    <h6 class="card-title">Género: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Duración: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Sala: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Valor ticket: <span v-text=""></span></h6>                                    
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
