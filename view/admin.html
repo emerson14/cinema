@@ -56,11 +56,14 @@
             <section class="mt-5 p-5">
                 <button class="btn btn-primary mb-2" >Usuarios</button>
                 <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#salas">Salas</button>
-                <button class="btn btn-primary mb-2">Películas</button>
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#pelis">Películas</button>
             </section>
             <!-- /Buttons -->
             <!-- Table User -->
             <section v-if="i==0">
+                <div class="container p-3">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span class="material-icons"> person_add_alt</span></button>
+                </div>
                 <div class="container">
                   <table class="table table-dark table-striped">
                         <thead>
@@ -87,6 +90,70 @@
                         </tbody>
                   </table>
                 </div>
+                <!-- Modal agg usuario -->
+                <section>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <div class="container">
+                              <div class="row">
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input id="floatingInput" type="text" class="form-control" placeholder="Nombre">
+                                    <label for="floatingInput" class="ms-2">Email address</label>
+                                  </div>
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Apellido">
+                                    <label for="floatingInput" class="ms-2">Apellido</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Direccion">
+                                    <label for="floatingInput" class="ms-2">Dirección</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" placeholder="Telefono">
+                                    <label for="floatingInput" class="ms-2">Telefono</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" placeholder="Email" required>
+                                    <label for="floatingInput" class="ms-2">Email</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Usuario">
+                                    <label for="floatingInput" class="ms-2">Usuario</label>
+                                  </div>
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Pin">
+                                    <label for="floatingInput" class="ms-2">Pin</label>
+                                  </div>
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Confirmar Pin">
+                                    <label for="floatingInput" class="ms-2">Confirmar Pin</label>
+                                  </div>
+                                  <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
+                                  <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione el rol</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Cajero</option>
+                                  </select>
+                                      
+                              </div>
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </section>
+                <!--  /Modal agg usuario-->
             </section>
             <!-- /Table User -->
             <!-- modalSalas -->
@@ -95,7 +162,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">Salas</h5>
+                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">SALAS</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -117,6 +184,106 @@
                 </div>
             </section>
             <!-- finalModalSalas -->
+            <!-- modalPelicula -->
+            <section>
+                <div class="modal fade" id="pelis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">PELÍCULAS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <span>Nombre</span>
+                                    <input type="text" class="form-control" id="" placeholder="nombre de la película">
+                                </div>
+                                <div>
+                                    <span>Género</span>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected>Seleccione un género</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>                                   
+                                </div>
+                                <div>
+                                    <span>Duración</span>
+                                    <input type="text" class="form-control" id="" placeholder="tiempo de duración">
+                                </div>   
+                                <span>Sinopsis</span>                       
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                    <label for="floatingTextarea">escriba sinopsis de la película</label>
+                                </div>   
+                                <div class="mb-3">
+                                    <label class="form-label">Imagen de la película</label>
+                                    <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly>
+                                    <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"  data-bs-target="#modalseleccionar">
+                                        Seleccionar imagen
+                                    </button>
+                                    <span v-if=""><strong class="text-center text-danger">Este campo es requerido</strong></span>
+                                </div>                     
+                            </div>
+                            <div class="modal-footer" id="footerModal">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-warning">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- finalModalPeliculas -->
+            <section id="cardPelis">
+                <!-- Modal seleccionar imagenes-->
+                <div class="modal fade" id="modalseleccionar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h5 class="modal-title text-center" id="exampleModalLabel">Seleccionar Imagen</h5>
+                                <button type="button" class="btn btn-dark back" data-bs-toggle="modal"  data-bs-target="#pelis">Regresar <i class="fa-solid fa-rotate-left"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/minions2Card.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/minions2Card.jpg')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/buzzlLightyearCard.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/buzzlLightyearCard.jpg')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/thorAmorYTruenoCard.png" class="card-img-top" alt="selectimg" @click="selectimg('../img/thorAmorYTruenoCard.png')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#">
+                                                <img src="../img/jurassincWorldCard.jpg" class="card-img-top" alt="selectimg" @click="selectimg('../img/jurassincWorldCard.jpg')">
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Modal seleccionar imagenes-->
+            </section>
             <!-- CardlSalas -->
             <section id="cartelera" class="mt-4" v-if="">
                 <div class="container">
