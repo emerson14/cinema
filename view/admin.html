@@ -94,14 +94,56 @@
                 <section>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuario</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            ...
+                            <div class="container">
+                              <div class="row">
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input id="floatingInput" type="text" class="form-control" placeholder="Nombre">
+                                    <label for="floatingInput" class="ms-2">Email address</label>
+                                  </div>
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Apellido">
+                                    <label for="floatingInput" class="ms-2">Apellido</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Direccion">
+                                    <label for="floatingInput" class="ms-2">Dirección</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" placeholder="Telefono">
+                                    <label for="floatingInput" class="ms-2">Telefono</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" placeholder="Email" required>
+                                    <label for="floatingInput" class="ms-2">Email</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Usuario">
+                                    <label for="floatingInput" class="ms-2">Usuario</label>
+                                  </div>
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Pin">
+                                    <label for="floatingInput" class="ms-2">Pin</label>
+                                  </div>
+                                  <div class="form-floating mb-3 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Confirmar Pin">
+                                    <label for="floatingInput" class="ms-2">Confirmar Pin</label>
+                                  </div>
+                                  <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
+                                  <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione el rol</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Cajero</option>
+                                  </select>
+                                      
+                              </div>
+                            </div>
                             </div>
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
