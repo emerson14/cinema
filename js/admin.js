@@ -57,16 +57,16 @@ var app = new Vue({
             { number: 2, status: 'available' },
             { number: 3, status: 'available' }, 
             { number: 4, status: 'available' }
-        ],},
+        ], amountChairs: 4, movie: 'testMovie1'},
             {roomCode: 'A2', chairs: [
             { number: 1, status: 'available' },
             { number: 2, status: 'available' },
             { number: 3, status: 'available' }, 
             { number: 4, status: 'available' }
-        ],}
+        ], amountChairs: 4, movie: 'testMovie2'}
         ],
         newRoom: {
-            roomCode: '', chairs: [], amountChairs: 0,
+            roomCode: '', chairs: [], amountChairs: 0, movie: '',
         },
         user: null,
         confirmPass: '',
