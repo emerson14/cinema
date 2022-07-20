@@ -58,6 +58,7 @@ var app = new Vue({
         openPayment: false,
         nTickets: 0,
         pMethod: '',
+        showBody: true,
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
        
@@ -181,8 +182,9 @@ var app = new Vue({
               });
         }else{
             this.user = '';
+            this.showBody = false;
             this.mensaje('No hay ningun usuario registrado, por favor ingresa sesion', 'error');
-            window.location.href = "login.html";
+            setTimeout(function(){ location.href = "login.html" }, 3000);
 
         }
         if (localStorage.getItem('rooms') !== null) {

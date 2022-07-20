@@ -298,3 +298,18 @@ header{
     background-color: gray;
 }
 
+/*START ERROR 401*/
+#error401 .notvalid{
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#error401 .container{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+/*END ERROR 401*/
+
