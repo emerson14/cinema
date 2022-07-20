@@ -126,7 +126,7 @@
                 <h5 class="card-title">Codigo de confirmacion</h5>
                 <h5 class="text-center text-danger">Nuevo código en: <strong>00</strong>:<strong v-if="seconds < 10">0</strong><strong v-text="seconds"></strong></h5>
                 <p class="card-text">Le hemos enviado un codigo confirmacion, por favor digitelo:</p>
-                <input    class="form-control" @keyp.enter="validateCode" v-model="confirmCode">
+                <input    class="form-control" @keyup.enter="validateCode" v-model="confirmCode">
                 <a href="#" class="card-link">Reenviar Nuevo Codido</a>
               </div>
               </div>
