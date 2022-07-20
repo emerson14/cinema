@@ -5,6 +5,7 @@ var app = new Vue({
     data: {
         users: [ ],
         newUser: {
+           
             name: '',
             lastName: '',
             address: '',
@@ -70,6 +71,16 @@ var app = new Vue({
         },
         user: null,
         confirmPass: '',
+        user2: {
+            name: '',
+            lastName: '',
+            address: '',
+            phoneNumber: '',
+            email: '',
+            password: '',
+            role: '',
+        },
+        
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
@@ -79,6 +90,7 @@ var app = new Vue({
                 this.newUser.email.length > 0 && this.newUser.password.length > 0
                 ) {
                     if (this.confirmPass === this.newUser.password) {
+                        this.newUser.id =  this.users.length + 1;
                         this.users.push({
                             ...this.newUser
                         });
@@ -96,6 +108,7 @@ var app = new Vue({
         },
         clearFields(){//limpiará los campos del formulario de registro de usuarios al crear la cuenta
             this.newUser = {
+                id: this.users.length + 1,
                 name: '',
                 lastName: '',
                 address: '',
@@ -156,9 +169,79 @@ var app = new Vue({
                 }
             })
         },
-       
 
-       
+        loadUser(user){
+            
+            this.user2.id = user.id;
+            this.user2.name = user.name;
+            this.user2.lastName = user.lastName;
+            this.user2.address = user.address;
+            this.user2.phoneNumber = user.phoneNumber;
+            this.user2.email = user.email;
+            this.user2.role = user.role;
+
+        },
+
+        editUser(){
+            
+            console.log('edittt');
+            this.users.forEach(user => {
+                if(this.user2.id == user.id){
+                    user.name = this.user2.name;
+                    user.lastName = this.user2.lastName;
+                    user.address = this.user2.address;
+                    user.phoneNumber = this.user2.phoneNumber;
+                    user.email = this.user2.email;
+                    user.role = this.user2.role;
+                }
+                }
+                
+            );
+
+            this.updateLocalStorage();
+
+           
+            // this.user2.name = '';
+            // this.user2.lastName = '';
+            // this.user2.address = '';
+            // this.user2.phoneNumber = '';
+            // this.user2.email ='';
+            // this.user2.role = '';
+
+            let btn = document.getElementById('closeEdit');
+            btn.click();
+
+
+            this.mensaje('El usuario ha sido modificado correctamente', 'succes');
+        },
+        delUser(index){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })       
+            swalWithBootstrapButtons.fire({
+                title: '¿Estás seguro de que desea eliminar?',
+                text: "No podras revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Eliminar',
+                cancelButtonText: 'No, Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.users.splice(index, 1);
+                    this.updateLocalStorage();
+                    this.mensaje("El usuario fue eliminado", "success");
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                }
+            })
+        },
+
         mensaje: function (msj, icono) {//para enviar alerts de sweet alert
             const Toast = Swal.mixin({
                 toast: true,
