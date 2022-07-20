@@ -17,6 +17,7 @@ var app = new Vue({
             },
         ],
         newUser: {
+           
             name: '',
             lastName: '',
             address: '',
@@ -47,6 +48,7 @@ var app = new Vue({
                 this.newUser.email.length > 0 && this.newUser.password.length > 0
                 ) {
                     if (this.confirmPass === this.newUser.password) {
+                        this.newUser.id =  this.users.length + 1;
                         this.users.push({
                             ...this.newUser
                         });
@@ -64,6 +66,7 @@ var app = new Vue({
         },
         clearFields(){//limpiará los campos del formulario de registro de usuarios al crear la cuenta
             this.newUser = {
+                id: this.users.length + 1,
                 name: '',
                 lastName: '',
                 address: '',

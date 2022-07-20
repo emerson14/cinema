@@ -75,7 +75,7 @@
                             <td v-if="item.status == 'active'" class="text-success"><span v-text="item.status">estado</span></td>
                             <td v-if="item.status == 'inactive'" class="text-danger"><span v-text="item.status">estado</span></td>
                             <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><span class="material-icons">edit</span></button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" @click='loadUser(item)'><span class="material-icons">edit</span></button>
                                 <button class="btn btn-danger" v-if="item.role !== 'superAdmin'"><span class="material-icons">delete_forever</span></button>
                             </td>
                           </tr>
@@ -150,37 +150,34 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuario</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Editar usuario</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
                                         <div class="row">
                                             <div class="form-floating mb-3 col-sm-6">
-                                                <input id="floatingInput" type="text" class="form-control" placeholder="Nombre">
-                                                <label for="floatingInput" class="ms-2">Email address</label>
+                                                <input id="floatingInput" type="text" class="form-control" placeholder="Nombre" v-model= 'user2.name'>
+                                                <label for="floatingInput" class="ms-2">Nombre</label>
                                             </div>
                                             <div class="form-floating mb-3 col-sm-6">
-                                                <input type="text" class="form-control" placeholder="Apellido">
+                                                <input type="text" class="form-control" placeholder="Apellido" v-model="user2.lastName">
                                                 <label for="floatingInput" class="ms-2">Apellido</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" placeholder="Direccion">
+                                                <input type="text" class="form-control" placeholder="Direccion" v-model="user2.address">
                                                 <label for="floatingInput" class="ms-2">Dirección</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="number" class="form-control" placeholder="Telefono">
+                                                <input type="number" class="form-control" placeholder="Telefono" v-model="user2.phoneNumber">
                                                 <label for="floatingInput" class="ms-2">Telefono</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" placeholder="Email" required>
+                                                <input type="email" class="form-control" placeholder="Email" v-model="user2.email" required>
                                                 <label for="floatingInput" class="ms-2">Email</label>
                                             </div>
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" placeholder="Usuario">
-                                                <label for="floatingInput" class="ms-2">Usuario</label>
-                                            </div>
-                                            <div class="form-floating mb-3">
+                                            
+                                            <!-- <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" placeholder="Pin">
                                                 <label for="floatingInput" class="ms-2">Pin Anterior</label>
                                             </div>
@@ -191,22 +188,23 @@
                                             <div class="form-floating mb-3 col-sm-6">
                                                 <input type="text" class="form-control" placeholder="Confirmar Pin">
                                                 <label for="floatingInput" class="ms-2">Confirmar Pin</label>
-                                            </div>
+                                            </div> -->
                                             <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ESTADO-->
                                             <div class="container">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Estado</option>
-                                                    <option value="1">Activo</option>
-                                                    <option value="2">Inactivo</option>
-                                                </select>
+                                                <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
+                                  <select class="form-select" aria-label="Default select example" v-model="user2.role">
+                                    <option selected>Seleccione el rol</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="user">Usuario</option>
+                                  </select>
                                             </div>
                 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-warning">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeEdit">Cerrar</button>
+                                    <button type="button" class="btn btn-warning" @click="editUser">Guardar</button>
                                 </div>
                             </div>
                         </div>
