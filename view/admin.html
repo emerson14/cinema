@@ -76,12 +76,13 @@
                             <td v-if="item.status == 'inactive'" class="text-danger"><span v-text="item.status">estado</span></td>
                             <td>
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" @click='loadUser(item)'><span class="material-icons">edit</span></button>
-                                <button class="btn btn-danger" v-if="item.role !== 'superAdmin'"><span class="material-icons">delete_forever</span></button>
+                                <button class="btn btn-danger" v-if="item.role !== 'superAdmin'"><span class="material-icons" @click="delUser(index)">delete_forever</span></button>
                             </td>
                           </tr>
                         </tbody>
                   </table>
                 </div>
+                <!-- /Table User -->
                 <!-- Modal agg usuario -->
                 <section>
                     <!-- Modal -->
@@ -212,7 +213,6 @@
                 </section>
                 <!--  /Modal Edit usuario-->
             </section>
-            <!-- /Table User -->
             <!-- modalSalas -->
             <section>
                 <div class="modal fade" id="salas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

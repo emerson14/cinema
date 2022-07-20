@@ -214,9 +214,34 @@ var app = new Vue({
 
             this.mensaje('El usuario ha sido modificado correctamente', 'succes');
         },
-       
+        delUser(index){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })       
+            swalWithBootstrapButtons.fire({
+                title: '¿Estás seguro de que desea eliminar?',
+                text: "No podras revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Eliminar',
+                cancelButtonText: 'No, Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.users.splice(index, 1);
+                    this.updateLocalStorage();
+                    this.mensaje("El usuario fue eliminado", "success");
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                }
+            })
+        },
 
-       
         mensaje: function (msj, icono) {//para enviar alerts de sweet alert
             const Toast = Swal.mixin({
                 toast: true,
