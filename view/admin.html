@@ -192,11 +192,11 @@
                                             <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ESTADO-->
                                             <div class="container">
                                                 <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
-                                  <select class="form-select" aria-label="Default select example" v-model="user2.role">
-                                    <option selected>Seleccione el rol</option>
-                                    <option value="admin">Administrador</option>
-                                    <option value="user">Usuario</option>
-                                  </select>
+                                                <select class="form-select" aria-label="Default select example" v-model="user2.role" v-if="user2.role !== 'superAdmin'">
+                                                    <option selected>Seleccione el rol</option>
+                                                    <option value="admin">Administrador</option>
+                                                    <option value="user">Usuario</option>
+                                                </select>
                                             </div>
                 
                                         </div>
