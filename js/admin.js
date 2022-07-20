@@ -5,7 +5,6 @@ var app = new Vue({
     data: {
         users: [ ],
         newUser: {
-           
             name: '',
             lastName: '',
             address: '',
@@ -80,7 +79,8 @@ var app = new Vue({
             password: '',
             role: '',
         },
-        
+        newCardImg: '',
+        newWallpaper: '',
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
@@ -95,8 +95,9 @@ var app = new Vue({
                             ...this.newUser
                         });
                         this.clearFields();
-                        //this.updateLocalStorage();
-                        this.mensaje("Su cuenta ha sido creada, un código de valicación fue enviado a su correo", "success");
+                        this.mensaje("Cuenta creada con exito", "success");
+                        let btn = document.getElementById('closeAddUser');
+                        btn.click();
                         this.updateLocalStorage();
                     }else{
                         this.mensaje("La contraseña ingresada y la confirmación no coinciden", "error");
@@ -123,6 +124,12 @@ var app = new Vue({
             //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
             this.movies.push({...this.newMovie});
         },
+        selectImages(cardImg, wallpaper){//cardImg será para mostrar en el card y wallpaper para el carousel
+            this.newCardImg = cardImg;
+            this.newWallpaper = wallpaper;
+            //al dar click a guardar en el modal peliculas esta información debe guardarse en el array movies
+            //para luego recorrer el array y mostrar los cards disponibles y las imagenes del carrusel
+        },
         addRoom(){
             if(this.newRoom.roomCode.length && this.newRoom.amountChairs > 0) {
                 this.rooms.push({...this.newRoom});
@@ -134,6 +141,8 @@ var app = new Vue({
                     this.newRoom.roomCode = '';
                     this.newRoom.amountChairs = 0;
                     this.updateLocalStorage();
+                    let btn = document.getElementById('closeRoomModal');
+                    btn.click();
                     this.mensaje('Sala creada', 'success');
                 }else{
                     this.mensaje('La cantidad de sillas debe ser mayor a cero', 'error');
