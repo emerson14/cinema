@@ -409,7 +409,7 @@
                         <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
                             <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger"
                                     v-text=""></span></h5>
-                            <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala">
+                            <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala" @click="showRooms(index)">
                                 <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>
                                 <h6 class="card-title">No. Asientos: <span v-text="item.amountChairs"></span></h6>
                                 <h6 class="card-title">Película Asignada: <span v-text="item.movie"></span></h6>
@@ -454,17 +454,33 @@
                 </div>
             </div>
             <!-- /Modal Agregar pelicula-sala-->
-            <!-- Modal  Agregar pelicula-sala-->
+            <!-- Modal  vista-sala -->
             <div class="modal fade" id="verSala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Vista Sala</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Vista Sala: <strong v-text="rooms[indexRoom].roomCode"></strong></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <div class="container" id="sillas">
+                                <div class="row mx-auto">
+                                    <ul>
+                                        <li class="col-2" v-for="(item, index) in rooms[indexRoom].chairs" :key="index">
+                                            <div v-if="item.status === 'available'">
+                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item,index)" disabled>
+                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                            </div>
+                                            <div class="disabled" v-else>
+                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" disabled>
+                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row"><button type="button" class="btn btn-dark col-12 my-2">Pantalla</button></div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
@@ -473,7 +489,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /Modal Agregar pelicula-sala-->
+            <!-- /Modal vista-sala-->
         </section>
         <!-- finalCardSalas -->
         <!-- CardPeliculas -->
