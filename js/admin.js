@@ -168,6 +168,33 @@ var app = new Vue({
                 this.mensaje('Seleccione una pelicula', 'error');
             }
         },
+        delRoom(item,index){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })       
+            swalWithBootstrapButtons.fire({
+                title: `¿Está seguro de que desea eliminar la sala ${item.roomCode}?`,
+                text: "No podras revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Eliminar',
+                cancelButtonText: 'No, Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.rooms.splice(index, 1);
+                    this.updateLocalStorage();
+                    this.mensaje("La sala fue eliminada", "success");
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                }
+            })
+        },
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
