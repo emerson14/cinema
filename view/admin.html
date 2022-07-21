@@ -380,50 +380,108 @@
                             <h1 class="menu-title">Salas</h1>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" v-if="rooms.length > 0">
                         <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in rooms" :key="index">
                             <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
-                                <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger" v-text=""></span></h5>
-                                <div class="card-body">                                                                     
-                                    <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>                                    
-                                    <h6 class="card-title">No. Asientos: <span v-text="item.amountChairs"></span></h6>                                                                    
-                                    <h6 class="card-title">Pelicula Asignada: <span v-text="item.movie"></span></h6>                       
+                                <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger"
+                                        v-text=""></span></h5>
+                                <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala" @click="showRooms(index)">
+                                    <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>
+                                    <h6 class="card-title">No. Asientos: <span v-text="item.amountChairs"></span></h6>
+                                    <h6 class="card-title">Película Asignada: <span v-text="item.movie"></span></h6>
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal" data-bs-target="#modalAgregarPelicula" @click="roomIndex(index)">Asignar Pelicula</button> 
-                                        <button type="button" class="btn btn-danger col-5 mx-auto" @click="delRoom(item,index)">Eliminar sala</button>
+                                        <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal"
+                                            data-bs-target="#modalAgregarPelicula" @click="roomIndex(index)">Asignar
+                                            Película</button>
+                                        <button type="button" class="btn btn-danger col-5 mx-auto"
+                                            @click="delRoom(item,index)">Eliminar sala</button>
                                     </div>
                                 </div>
                             </div>
                             <hr>
                         </div>
                     </div>
+                    <div v-else>
+                        <h1 class="text-center mt-5 mb-5">No se ha creado ninguna sala</h1>
+                    </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="modalAgregarPelicula" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <!-- Modal  Agregar pelicula-sala-->
+                <div class="modal fade" id="modalAgregarPelicula" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Agregar Pelicula</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">Agregar Película</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="container">
                                     <select class="form-select" aria-label="Default select example" v-model="optionMovie">
-                                        <option :value="item" v-for="(item, index) in movies" v-text="item.title"></option>
+                                        <option :value="item.title" v-for="(item, index) in movies" v-text="item.title">
+                                        </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="closeAssignMovie">Cerrar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                    id="closeAssignMovie">Cerrar</button>
                                 <button type="button" class="btn btn-warning" @click="assignMovie">Guardar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /Modal -->
+                <!-- /Modal Agregar pelicula-sala-->
+                <!-- Modal  vista-sala -->
+                <div class="modal fade" id="verSala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true" v-if="rooms.length > 0">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Vista Sala: <strong v-text="rooms[indexRoom].roomCode"></strong></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container" id="sillas">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Vacant Chairs: </strong></p>
+                                            <input type="checkbox" id="check_example1" name="check" value="" disabled>
+                                            <label for="check_example1">1</label>
+                                        </div>
+                                        <div class="disabled col-6">
+                                            <p><strong>Occupied Chairs: </strong></p>
+                                            <input type="checkbox" id="check_example1" name="check" value="" disabled>
+                                            <label for="check_example1">1</label>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row mx-auto">
+                                        <ul>
+                                            <li class="col-2" v-for="(item, index) in rooms[indexRoom].chairs" :key="index">
+                                                <div v-if="item.status === 'available'">
+                                                    <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item,index)" disabled>
+                                                    <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                                </div>
+                                                <div class="disabled" v-else>
+                                                    <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" disabled>
+                                                    <label :for="`check_${item.number}`" v-text="item.number">1</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="row"><button type="button" class="btn btn-dark col-12 my-2">Pantalla</button></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                    id="closeAssignMovie">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Modal vista-sala-->
             </section>
             <!-- finalCardSalas -->
             <!-- CardPeliculas -->
@@ -485,280 +543,6 @@
             </div>
         </section>
         <!-- finalModalSalas -->
-<<<<<<< HEAD
-=======
-        <!-- modalPelicula -->
-        <section>
-            <div class="modal fade" id="pelis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title col-11 text-center" id="exampleModalLabel">PELÍCULAS</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div>
-                                <span>Nombre</span>
-                                <input type="text" class="form-control" id="" placeholder="nombre de la película">
-                            </div>
-                            <div>
-                                <span>Género</span>
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option selected>Seleccione una opción</option>
-                                    <option value="1">Terror</option>
-                                    <option value="2">Comedia</option>
-                                    <option value="3">Ciencia ficción</option>
-                                </select>
-                            </div>
-                            <div>
-                                <span>Duración</span>
-                                <input type="text" class="form-control" id="" placeholder="tiempo de duración">
-                            </div>
-                            <span>Sinopsis</span>
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here"
-                                    id="floatingTextarea"></textarea>
-                            </div>
-                            <div>
-                                <span>Estreno</span>
-                                <input type="text" class="form-control" id="" placeholder="fecha de estreno">
-                            </div>
-                            <div>
-                                <span>Valor ticket</span>
-                                <input type="number" class="form-control" id="" placeholder="valor ticket">
-                            </div>
-                            <div>
-                                <span>Sala</span>
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option selected>Seleccione una opción</option>
-                                    <option value="1">data</option>
-                                    <option value="2">data</option>
-                                    <option value="3">data</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Imagen de la película</label>
-                                <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly
-                                    v-model="newCardImg">
-                                <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"
-                                    data-bs-target="#modalseleccionar">
-                                    Seleccionar imagen
-                                </button>
-                            </div>
-                        </div>
-                        <div class="modal-footer" id="footerModal">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-warning">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- finalModalPeliculas -->
-        <section id="cardPelis">
-            <!-- Modal seleccionar imagenes-->
-            <div class="modal fade" id="modalseleccionar" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" data-bs-backdrop="static">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h5 class="modal-title text-center" id="exampleModalLabel">Seleccionar Imagen</h5>
-                            <button type="button" class="btn btn-dark back" data-bs-toggle="modal"
-                                data-bs-target="#pelis">Regresar <i class="fa-solid fa-rotate-left"></i></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
-                                            <img src="../img/minions2Card.jpg" class="card-img-top" alt="selectimg"
-                                                @click="selectImages('../img/minions2Card.jpg', '../img/minions2.jpg')">
-                                            <div class="card-body">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
-                                            <img src="../img/buzzlLightyearCard.jpg" class="card-img-top"
-                                                alt="selectimg"
-                                                @click="selectImages('../img/buzzlLightyearCard.jpg', '../img/buzzlLightyear.jpg')">
-                                            <div class="card-body">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
-                                            <img src="../img/thorAmorYTruenoCard.png" class="card-img-top"
-                                                alt="selectimg"
-                                                @click="selectImages('../img/thorAmorYTruenoCard.png', '../img/thorAmorYTrueno.jpg')">
-                                            <div class="card-body">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
-                                            <img src="../img/jurassincWorldCard.jpg" class="card-img-top"
-                                                alt="selectimg"
-                                                @click="selectImages('../img/jurassincWorldCard.jpg', '../img/jurassincWorld.jpg')">
-                                            <div class="card-body">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /Modal seleccionar imagenes-->
-        </section>
-        <!-- CardlSalas -->
-        <section id="cartelera" class="mt-4" v-if="">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center text-uppercase">
-                        <h1 class="menu-title">Salas</h1>
-                    </div>
-                </div>
-                <div class="row" v-if="rooms.length > 0">
-                    <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in rooms" :key="index">
-                        <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
-                            <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger"
-                                    v-text=""></span></h5>
-                            <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala" @click="showRooms(index)">
-                                <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>
-                                <h6 class="card-title">No. Asientos: <span v-text="item.amountChairs"></span></h6>
-                                <h6 class="card-title">Película Asignada: <span v-text="item.movie"></span></h6>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal"
-                                        data-bs-target="#modalAgregarPelicula" @click="roomIndex(index)">Asignar
-                                        Película</button>
-                                    <button type="button" class="btn btn-danger col-5 mx-auto"
-                                        @click="delRoom(item,index)">Eliminar sala</button>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div v-else>
-                    <h1 class="text-center mt-5 mb-5">No se ha creado ninguna sala</h1>
-                </div>
-            </div>
-            <!-- Modal  Agregar pelicula-sala-->
-            <div class="modal fade" id="modalAgregarPelicula" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Agregar Película</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <select class="form-select" aria-label="Default select example" v-model="optionMovie">
-                                    <option :value="item.title" v-for="(item, index) in movies" v-text="item.title">
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                id="closeAssignMovie">Cerrar</button>
-                            <button type="button" class="btn btn-warning" @click="assignMovie">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /Modal Agregar pelicula-sala-->
-            <!-- Modal  vista-sala -->
-            <div class="modal fade" id="verSala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true" v-if="rooms.length > 0">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Vista Sala: <strong v-text="rooms[indexRoom].roomCode"></strong></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container" id="sillas">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p><strong>Vacant Chairs: </strong></p>
-                                        <input type="checkbox" id="check_example1" name="check" value="" disabled>
-                                        <label for="check_example1">1</label>
-                                    </div>
-                                    <div class="disabled col-6">
-                                        <p><strong>Occupied Chairs: </strong></p>
-                                        <input type="checkbox" id="check_example1" name="check" value="" disabled>
-                                        <label for="check_example1">1</label>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row mx-auto">
-                                    <ul>
-                                        <li class="col-2" v-for="(item, index) in rooms[indexRoom].chairs" :key="index">
-                                            <div v-if="item.status === 'available'">
-                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item,index)" disabled>
-                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
-                                            </div>
-                                            <div class="disabled" v-else>
-                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" disabled>
-                                                <label :for="`check_${item.number}`" v-text="item.number">1</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="row"><button type="button" class="btn btn-dark col-12 my-2">Pantalla</button></div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                id="closeAssignMovie">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /Modal vista-sala-->
-        </section>
-        <!-- finalCardSalas -->
-        <!-- CardPeliculas -->
-        <section id="cartelera" class="mt-4" v-if="">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center text-uppercase">
-                        <h1 class="menu-title">PELÍCULAS</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
-                        <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                            <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
-                            <div class="card-body">
-                                <h6 class="card-title">Género: <span v-text=""></span></h6>
-                                <h6 class="card-title">Estreno: <span v-text=""></span></h6>
-                                <h6 class="card-title">Duración: <span v-text=""></span></h6>
-                                <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>
-                                <h6 class="card-title">Sala: <span v-text=""></span></h6>
-                                <h6 class="card-title">Valor ticket: <span v-text=""></span></h6>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <button type="button" class="btn btn-danger mx-auto">Eliminar Película</button>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- FinCardPeliculas -->
->>>>>>> main
         <!-- FOOTER -->
         <footer id="footer" class="pb-4 pt-4">
             <div class="container">
