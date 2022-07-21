@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal" data-bs-target="#modalAgregarPelicula">Asignar Pelicula</button> 
+                                        <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal" data-bs-target="#modalAgregarPelicula" @click="roomIndex(index)">Asignar Pelicula</button> 
                                         <button type="button" class="btn btn-danger col-5 mx-auto">Eliminar sala</button>
                                     </div>
                                 </div>
@@ -395,15 +395,14 @@
                             </div>
                             <div class="modal-body">
                                 <div class="container">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccione Pelicula</option>
-                                        <option value="" v-for="item in movies" v-text="item.title"></option>
+                                    <select class="form-select" aria-label="Default select example" v-model="optionMovie">
+                                        <option :value="item.title" v-for="(item, index) in movies" v-text="item.title"></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-warning">Guardar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="closeAssignMovie">Cerrar</button>
+                                <button type="button" class="btn btn-warning" @click="assignMovie">Guardar</button>
                             </div>
                         </div>
                     </div>

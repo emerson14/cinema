@@ -19,7 +19,8 @@ var app = new Vue({
             release: '',
             duration: '',
             gender: '',
-            img: ''
+            imgCard: '',
+            wallpaper: '',
         },
         movies: [//remporalmente con datos quemados, mientras se adpta el frontend para la creacion de peliculas por parte del admin
             {
@@ -81,6 +82,8 @@ var app = new Vue({
         },
         newCardImg: '',
         newWallpaper: '',
+        optionMovie: '',// guarda la opción seleccionada al asignar una pelicula a una sala
+        roomPos: 0,
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
@@ -149,6 +152,20 @@ var app = new Vue({
                 }
             }else{
                 this.mensaje('Ingrese todos los campos', 'error');
+            }
+        },
+        roomIndex(index){
+            this.roomPos = index;
+        },
+        assignMovie(){
+            if (this.optionMovie.length > 0) {
+                this.rooms[this.roomPos].movie = this.optionMovie;
+                this.mensaje(`Se ha asignado la pelicula ${this.optionMovie} a la sala ${this.rooms[this.roomPos].roomCode}`, 'success');
+                this.updateLocalStorage();
+                let btnClose = document.getElementById('closeAssignMovie');
+            btnClose.click();
+            }else{
+                this.mensaje('Seleccione una pelicula', 'error');
             }
         },
         logout(){
