@@ -366,7 +366,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in rooms" :key="index">
-                            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                            <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
                                 <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger" v-text=""></span></h5>
                                 <div class="card-body">                                                                     
                                     <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>                                    
@@ -375,7 +375,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <button type="button" class="btn btn-warning col-6 mx-auto">Asignar Pelicula</button> 
+                                        <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal" data-bs-target="#modalAgregarPelicula">Asignar Pelicula</button> 
+                                        <button type="button" class="btn btn-danger col-5 mx-auto">Eliminar sala</button>
                                     </div>
                                 </div>
                             </div>
@@ -383,6 +384,31 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modalAgregarPelicula" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Agregar Pelicula</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Seleccione Pelicula</option>
+                                        <option value="" v-for="item in movies" v-text="item.title"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-warning">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Modal -->
             </section>
             <!-- finalCardSalas -->
             <!-- CardPeliculas -->
