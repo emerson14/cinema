@@ -246,7 +246,7 @@ var app = new Vue({
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.movie.splice(index, 1);
+                    this.movies.splice(index, 1);
                     this.updateLocalStorage();
                     this.mensaje("La pelicula fue eliminada", "success");
                 } else if (
