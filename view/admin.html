@@ -253,53 +253,42 @@
                             <div class="modal-body">
                                 <div>
                                     <span>Nombre</span>
-                                    <input type="text" class="form-control" id="" placeholder="nombre de la película">
+                                    <input type="text" class="form-control" id="" placeholder="nombre de la película" v-model="newMovie.title">
                                 </div>
                                 <div>
                                     <span>Género</span>
-                                    <select class="form-select form-select-sm"aria-label=".form-select-sm example">
-                                        <option selected>Seleccione una opción</option>
-                                        <option value="1">Terror</option>
-                                        <option value="2">Comedia</option>
-                                        <option value="3">Ciencia ficción</option>
+                                    <select class="form-select form-select-sm"aria-label=".form-select-sm example" v-model="newMovie.gender" >
+                                        <option selected value="">Seleccione una opción</option>
+                                        <option value="Terror">Terror</option>
+                                        <option value="Comedia">Comedia</option>
+                                        <option value="Ciencia Ficción">Ciencia ficción</option>
+                                        <option value="Acción">Acción/option>
                                     </select>                                   
                                 </div>
                                 <div>
-                                    <span>Duración</span>
-                                    <input type="text" class="form-control" id="" placeholder="tiempo de duración">
+                                    <span>Duración en minutos:</span>
+                                    <input type="number" class="form-control" id="" placeholder="tiempo de duración" v-model="newMovie.duration">
                                 </div>   
                                 <span>Sinopsis</span>                       
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" v-model="newMovie.synopsis"></textarea>
                                 </div>
                                 <div>
                                     <span>Estreno</span>
-                                    <input type="text" class="form-control" id="" placeholder="fecha de estreno">
+                                    <input type="date" class="form-control" id="" placeholder="fecha de estreno" v-model="newMovie.release">
                                 </div>
-                                <div>
-                                    <span>Valor ticket</span>
-                                    <input type="number" class="form-control" id="" placeholder="valor ticket">
-                                </div>
-                                <div>
-                                    <span>Sala</span>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected>Seleccione una opción</option>
-                                        <option value="1">data</option>
-                                        <option value="2">data</option>
-                                        <option value="3">data</option>
-                                    </select>                                   
-                                </div>   
+                                
                                 <div class="mb-3">
                                     <label class="form-label">Imagen de la película</label>
-                                    <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly v-model="newCardImg">
+                                    <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly v-model="newMovie.img">
                                     <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"  data-bs-target="#modalseleccionar">
                                         Seleccionar imagen
                                     </button>
                                 </div>                     
                             </div>
                             <div class="modal-footer" id="footerModal">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-warning">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closePeli">Cerrar</button>
+                                <button type="button" class="btn btn-warning" @click="addMovie">Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -396,7 +385,7 @@
                             <div class="modal-body">
                                 <div class="container">
                                     <select class="form-select" aria-label="Default select example" v-model="optionMovie">
-                                        <option :value="item.title" v-for="(item, index) in movies" v-text="item.title"></option>
+                                        <option :value="item" v-for="(item, index) in movies" v-text="item.title"></option>
                                     </select>
                                 </div>
                             </div>
@@ -419,16 +408,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
+                        <div class="col-md-6 col-lg-3 mt-3 mb-4"  v-for="(item, index) in movies" :key="index">
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                                <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
+                                <h5 class="text-center">TITULO: <span class="text-danger" v-text="item.title"></span></h5>
                                 <div class="card-body">                                                                                                     
-                                    <h6 class="card-title">Género: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Duración: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Sala: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Valor ticket: <span v-text=""></span></h6>                                                                    
+                                    <h6 class="card-title">Género: <span v-text="item.gender"></span></h6>                                                                    
+                                    <h6 class="card-title">Estreno: <span v-text="item.release"></span></h6>                                                                    
+                                    <h6 class="card-title">Duración: <span v-text="item.duration"></span></h6>                                                                    
+                                    <h6 class="card-title">Sinopsis: <span v-text="item.synopsis"></span></h6>                                                                    
+                                    <h6 class="card-title">Sala: <span v-text="item.sala"></span></h6>                                                                    
+                                    <h6 class="card-title">Valor ticket: <span v-text="ticket"></span></h6>                                                                    
                                 </div>
                             </div>
                             <hr>

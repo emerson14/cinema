@@ -14,13 +14,17 @@ var app = new Vue({
             role: 'user',
             status: 'inactive',
         },
+        ticket: 9000,
+
         newMovie: {//para cuando el admin agregue una nueva pelicula
             title: '',
             release: '',
             duration: '',
             gender: '',
-            imgCard: '',
-            wallpaper: '',
+            img: '',
+            imgW: '',
+            synopsis: '',
+
         },
         movies: [//remporalmente con datos quemados, mientras se adpta el frontend para la creacion de peliculas por parte del admin
             {
@@ -28,28 +32,41 @@ var app = new Vue({
             release: '14/07/2022',
             duration: '2 hours',
             gender: 'test',
-            img: '../img/buzzlLightyearCard.jpg'
+            img: '../img/buzzlLightyearCard.jpg',
+            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.',
+            imgW: '../img/buzzlLightyear.jpg',
+            sala: ''
             },
             {
             title: 'Jurassic World',
             release: '14/07/2022',
             duration: '2 hours',
             gender: 'test',
-            img: '../img/jurassincWorldCard.jpg'
-            },
+            img: '../img/jurassincWorldCard.jpg',
+            imgW: '../img/jurassincWorld.jpg',
+            sala: '',
+            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
+            
+        },
             {
             title: 'Minions',
             release: '14/07/2022',
             duration: '2 hours',
             gender: 'test',
-            img: '../img/minions2Card.jpg'
+            img: '../img/minions2Card.jpg',
+            imgW: '../img/minions2.jpg',
+            sala: '',
+            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
             },
             {
             title: 'Thor Amor y Trueno',
             release: '14/07/2022',
             duration: '2 hours',
             gender: 'test',
-            img: '../img/thorAmorYTruenoCard.png'
+            img: '../img/thorAmorYTruenoCard.png',
+            imgW: '../img/thorAmorYTrueno.jpg',
+            sala: '',
+            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
             }
         ],
         rooms: [
@@ -125,11 +142,23 @@ var app = new Vue({
         },
         addMovie(){//agrega la nueva pelicula en el arreglo de peliculas disponibles (movies)
             //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
-            this.movies.push({...this.newMovie});
+
+            if(this.newMovie.title == '' || this.newMovie.release == '' || this.newMovie.duration == '' || this.newMovie.gender == '' || this.newMovie.img == '' || this.newMovie.imgW == ''  || this.newMovie.synopsis == '' ){
+                this.mensaje('Rellena todos los campos para agregar un pelicula', 'error');
+                return
+            }
+            else{
+                this.movies.push({...this.newMovie});
+                this.updateLocalStorage();
+                this.mensaje('Se agrego correctamente la pelicula', 'succes');
+                let btn = document.getElementById('closePeli');
+                btn.click();
+            }
+           
         },
         selectImages(cardImg, wallpaper){//cardImg será para mostrar en el card y wallpaper para el carousel
-            this.newCardImg = cardImg;
-            this.newWallpaper = wallpaper;
+            this.newMovie.img = cardImg;
+            this.newMovie.imgW = wallpaper;
             //al dar click a guardar en el modal peliculas esta información debe guardarse en el array movies
             //para luego recorrer el array y mostrar los cards disponibles y las imagenes del carrusel
         },
@@ -158,9 +187,10 @@ var app = new Vue({
             this.roomPos = index;
         },
         assignMovie(){
-            if (this.optionMovie.length > 0) {
-                this.rooms[this.roomPos].movie = this.optionMovie;
-                this.mensaje(`Se ha asignado la pelicula ${this.optionMovie} a la sala ${this.rooms[this.roomPos].roomCode}`, 'success');
+            if (this.optionMovie != '') {
+                this.rooms[this.roomPos].movie = this.optionMovie.title;
+                this.mensaje(`Se ha asignado la pelicula ${this.optionMovie.title} a la sala ${this.rooms[this.roomPos].roomCode}`, 'success');
+                this.optionMovie.sala =  this.rooms[this.roomPos].roomCode;
                 this.updateLocalStorage();
                 let btnClose = document.getElementById('closeAssignMovie');
             btnClose.click();
@@ -195,6 +225,36 @@ var app = new Vue({
                 }
             })
         },
+
+
+        delMovie(item,index){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })       
+            swalWithBootstrapButtons.fire({
+                title: `¿Está seguro de que desea eliminar la pelicula ${item.title}?`,
+                text: "No podras revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Eliminar',
+                cancelButtonText: 'No, Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.movie.splice(index, 1);
+                    this.updateLocalStorage();
+                    this.mensaje("La pelicula fue eliminada", "success");
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                }
+            })
+        },
+
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -316,6 +376,7 @@ var app = new Vue({
             localStorage.setItem('users', JSON.stringify(this.users));
             localStorage.setItem('user', JSON.stringify(this.user));
             localStorage.setItem('rooms', JSON.stringify(this.rooms));
+            localStorage.setItem('movies', JSON.stringify(this.movies));
         },
 
     },
@@ -345,6 +406,11 @@ var app = new Vue({
             this.rooms = JSON.parse(localStorage.getItem('rooms'));
         }else{
             this.rooms = this.rooms;
+        }
+        if (localStorage.getItem('movies') !== null) {
+            this.movies = JSON.parse(localStorage.getItem('movies'));
+        }else{
+            this.movies = this.movies;
         }
     }
 });

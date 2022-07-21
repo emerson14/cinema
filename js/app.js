@@ -192,5 +192,10 @@ var app = new Vue({
         }else{
             this.rooms = this.rooms;
         }
+        if (localStorage.getItem('movies') !== null) {
+            this.movies = JSON.parse(localStorage.getItem('movies'));
+        }else{
+            this.movies = this.movies;
+        }
     }
 });
