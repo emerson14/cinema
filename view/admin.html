@@ -1,184 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cinema</title>
-        <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-        crossorigin="anonymous"
-        />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="../css/styles.css">
-        <link rel="icon" href="../img/logocinema.ico">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet">
-    </head>
-    <body class="body2">
-        <div id="admin">
-  
-            <!-- HEADER -->
-            <header>
-                <nav id="navbar" class="navbar navbar-expand-lg bg-light navbar-dark">
-                    <div class="container">
-                        <a class="navbar-brand" href="app.html">
-                            <img src="../img/logocinema.png" alt="logo">
-                            <span>Cinema</span>
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="app.html">Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i
-                                            class="fa-solid fa-right-from-bracket"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-            <!-- /Buttons -->
-            <section class="mt-5 p-5">
-                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#salas">Salas</button>
-                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#pelis">Películas</button>
-            </section>
-            <!-- /Buttons -->
-            <!-- Table User -->
-            <section v-if="user.role == 'superAdmin'">
-                <div class="container p-3">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span class="material-icons"> person_add_alt</span></button>
-                </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../img/logocinema.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="body2">
+    <div id="admin">
+
+        <!-- HEADER -->
+        <header>
+            <nav id="navbar" class="navbar navbar-expand-lg bg-light navbar-dark">
                 <div class="container">
-                  <table class="table table-dark table-striped">
-                        <thead>
-                          <tr>
+                    <a class="navbar-brand" href="app.html">
+                        <img src="../img/logocinema.png" alt="logo">
+                        <span>Cinema</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="app.html">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link logout" aria-current="page" href="#" @click="logout">Cerrar Sesión<i
+                                        class="fa-solid fa-right-from-bracket"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- /Buttons -->
+        <section class="mt-5 p-5">
+            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#salas">Salas</button>
+            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#pelis">Películas</button>
+        </section>
+        <!-- /Buttons -->
+        <!-- Table User -->
+        <section v-if="user.role == 'superAdmin'">
+            <div class="container p-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span
+                        class="material-icons"> person_add_alt</span></button>
+            </div>
+            <div class="container">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Email</th>
                             <th scope="col">Rol</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Opciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr  v-for="(item, index) in users" :key="index">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in users" :key="index">
                             <td v-text="`${item.name} ${item.lastName}`"></td>
                             <td><span v-text="item.email">email@.com</span></td>
                             <td><span v-text="item.role">Usuario/empleado</span></td>
-                            <td v-if="item.status == 'active'" class="text-success"><span v-text="item.status">estado</span></td>
-                            <td v-if="item.status == 'inactive'" class="text-danger"><span v-text="item.status">estado</span></td>
+                            <td v-if="item.status == 'active'" class="text-success"><span
+                                    v-text="item.status">estado</span></td>
+                            <td v-if="item.status == 'inactive'" class="text-danger"><span
+                                    v-text="item.status">estado</span></td>
                             <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" @click='loadUser(item)'><span class="material-icons">edit</span></button>
-                                <button class="btn btn-danger" v-if="item.role !== 'superAdmin'" @click="delUser(index)"><span class="material-icons">delete_forever</span></button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"
+                                    @click='loadUser(item)'><span class="material-icons">edit</span></button>
+                                <button class="btn btn-danger" v-if="item.role !== 'superAdmin'"
+                                    @click="delUser(index)"><span class="material-icons">delete_forever</span></button>
                             </td>
-                          </tr>
-                        </tbody>
-                  </table>
-                </div>
-                <!-- /Table User -->
-                <!-- Modal agg usuario -->
-                <section>
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /Table User -->
+            <!-- Modal agg usuario -->
+            <section>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuario</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuario</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            <div class="container">
-                              <div class="row">
-                                  <div class="form-floating mb-3 col-sm-6">
-                                    <input id="floatingInput" type="text" class="form-control" placeholder="Nombre" v-model="newUser.name">
-                                    <label for="floatingInput" class="ms-2">Nombre</label>
-                                  </div>
-                                  <div class="form-floating mb-3 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Apellido" v-model="newUser.lastName">
-                                    <label for="floatingInput" class="ms-2">Apellido</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" placeholder="Direccion" v-model="newUser.address">
-                                    <label for="floatingInput" class="ms-2">Dirección</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" placeholder="Telefono" v-model="newUser.phoneNumber">
-                                    <label for="floatingInput" class="ms-2">Telefono</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" required v-model="newUser.email">
-                                    <label for="floatingInput" class="ms-2">Email</label>
-                                  </div>
-                                  <div class="form-floating mb-3 col-sm-6">
-                                    <input type="password" class="form-control" placeholder="Password" v-model="newUser.password">
-                                    <label for="floatingInput" class="ms-2">Contraseña</label>
-                                  </div>
-                                  <div class="form-floating mb-3 col-sm-6">
-                                    <input type="password" class="form-control" placeholder="Confirmar Pin" v-model="confirmPass">
-                                    <label for="floatingInput" class="ms-2">Confirmar contraseña</label>
-                                  </div>
-                                  <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
-                                  <select class="form-select" aria-label="Default select example" v-model="newUser.role">
-                                    <option selected>Seleccione el rol</option>
-                                    <option value="admin">Administrador</option>
-                                    <option value="user">Usuario</option>
-                                  </select>
-                                      
-                              </div>
-                            </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="form-floating mb-3 col-sm-6">
+                                            <input id="floatingInput" type="text" class="form-control"
+                                                placeholder="Nombre" v-model="newUser.name">
+                                            <label for="floatingInput" class="ms-2">Nombre</label>
+                                        </div>
+                                        <div class="form-floating mb-3 col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Apellido"
+                                                v-model="newUser.lastName">
+                                            <label for="floatingInput" class="ms-2">Apellido</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" placeholder="Direccion"
+                                                v-model="newUser.address">
+                                            <label for="floatingInput" class="ms-2">Dirección</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" placeholder="Telefono"
+                                                v-model="newUser.phoneNumber">
+                                            <label for="floatingInput" class="ms-2">Telefono</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" placeholder="Email" required
+                                                v-model="newUser.email">
+                                            <label for="floatingInput" class="ms-2">Email</label>
+                                        </div>
+                                        <div class="form-floating mb-3 col-sm-6">
+                                            <input type="password" class="form-control" placeholder="Password"
+                                                v-model="newUser.password">
+                                            <label for="floatingInput" class="ms-2">Contraseña</label>
+                                        </div>
+                                        <div class="form-floating mb-3 col-sm-6">
+                                            <input type="password" class="form-control" placeholder="Confirmar Pin"
+                                                v-model="confirmPass">
+                                            <label for="floatingInput" class="ms-2">Confirmar contraseña</label>
+                                        </div>
+                                        <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
+                                        <select class="form-select" aria-label="Default select example"
+                                            v-model="newUser.role">
+                                            <option selected>Seleccione el rol</option>
+                                            <option value="admin">Administrador</option>
+                                            <option value="user">Usuario</option>
+                                        </select>
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeAddUser">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click="addUser">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    id="closeAddUser">Cerrar</button>
+                                <button type="button" class="btn btn-primary" @click="addUser">Guardar</button>
                             </div>
                         </div>
-                        </div>
                     </div>
-                </section>
-                <!--  /Modal agg usuario-->
-                <!-- Modal Edit usuario -->
-                <section>
-                    <!-- Modal -->
-                    <div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Editar usuario</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="form-floating mb-3 col-sm-6">
-                                                <input id="floatingInput" type="text" class="form-control" placeholder="Nombre" v-model= 'user2.name'>
-                                                <label for="floatingInput" class="ms-2">Nombre</label>
-                                            </div>
-                                            <div class="form-floating mb-3 col-sm-6">
-                                                <input type="text" class="form-control" placeholder="Apellido" v-model="user2.lastName">
-                                                <label for="floatingInput" class="ms-2">Apellido</label>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" placeholder="Direccion" v-model="user2.address">
-                                                <label for="floatingInput" class="ms-2">Dirección</label>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control" placeholder="Telefono" v-model="user2.phoneNumber">
-                                                <label for="floatingInput" class="ms-2">Telefono</label>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" placeholder="Email" v-model="user2.email" required>
-                                                <label for="floatingInput" class="ms-2">Email</label>
-                                            </div>
-                                            
-                                            <!-- <div class="form-floating mb-3">
+                </div>
+            </section>
+            <!--  /Modal agg usuario-->
+            <!-- Modal Edit usuario -->
+            <section>
+                <!-- Modal -->
+                <div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Editar usuario</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="form-floating mb-3 col-sm-6">
+                                            <input id="floatingInput" type="text" class="form-control"
+                                                placeholder="Nombre" v-model='user2.name'>
+                                            <label for="floatingInput" class="ms-2">Nombre</label>
+                                        </div>
+                                        <div class="form-floating mb-3 col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Apellido"
+                                                v-model="user2.lastName">
+                                            <label for="floatingInput" class="ms-2">Apellido</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" placeholder="Direccion"
+                                                v-model="user2.address">
+                                            <label for="floatingInput" class="ms-2">Dirección</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" placeholder="Telefono"
+                                                v-model="user2.phoneNumber">
+                                            <label for="floatingInput" class="ms-2">Telefono</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" placeholder="Email"
+                                                v-model="user2.email" required>
+                                            <label for="floatingInput" class="ms-2">Email</label>
+                                        </div>
+
+                                        <!-- <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" placeholder="Pin">
                                                 <label for="floatingInput" class="ms-2">Pin Anterior</label>
                                             </div>
@@ -190,321 +213,347 @@
                                                 <input type="text" class="form-control" placeholder="Confirmar Pin">
                                                 <label for="floatingInput" class="ms-2">Confirmar Pin</label>
                                             </div> -->
-                                            <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ESTADO-->
-                                            <div class="container">
-                                                <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
-                                                <select class="form-select" aria-label="Default select example" v-model="user2.role" v-if="user2.role !== 'superAdmin'">
-                                                    <option selected>Seleccione el rol</option>
-                                                    <option value="admin">Administrador</option>
-                                                    <option value="user">Usuario</option>
-                                                </select>
-                                            </div>
-                
+                                        <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ESTADO-->
+                                        <div class="container">
+                                            <!-- AQUI INCORPORAR UN VFOR O POR VALORES PARA ASIGNAR EL ROL -->
+                                            <select class="form-select" aria-label="Default select example"
+                                                v-model="user2.role" v-if="user2.role !== 'superAdmin'">
+                                                <option selected>Seleccione el rol</option>
+                                                <option value="admin">Administrador</option>
+                                                <option value="user">Usuario</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeEdit">Cerrar</button>
-                                    <button type="button" class="btn btn-warning" @click="editUser">Guardar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--  /Modal Edit usuario-->
-            </section>
-            <!-- modalSalas -->
-            <section>
-                <div class="modal fade" id="salas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">SALAS</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div>
-                                    <span>Nombre</span>
-                                    <input type="text" class="form-control" id="" placeholder="nombre de la sala" v-model="newRoom.roomCode">
-                                </div>
-                                <div>
-                                    <span>Cantidad Asientos</span>
-                                    <input type="number" class="form-control" id="" placeholder="número de asientos" v-model="newRoom.amountChairs">
-                                </div>                          
-                            </div>
-                            <div class="modal-footer" id="footerModal">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeRoomModal">Cerrar</button>
-                                <button type="button" class="btn btn-warning" @click="addRoom">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- finalModalSalas -->
-            <!-- modalPelicula -->
-            <section>
-                <div class="modal fade" id="pelis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">PELÍCULAS</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div>
-                                    <span>Nombre</span>
-                                    <input type="text" class="form-control" id="" placeholder="nombre de la película">
-                                </div>
-                                <div>
-                                    <span>Género</span>
-                                    <select class="form-select form-select-sm"aria-label=".form-select-sm example">
-                                        <option selected>Seleccione una opción</option>
-                                        <option value="1">Terror</option>
-                                        <option value="2">Comedia</option>
-                                        <option value="3">Ciencia ficción</option>
-                                    </select>                                   
-                                </div>
-                                <div>
-                                    <span>Duración</span>
-                                    <input type="text" class="form-control" id="" placeholder="tiempo de duración">
-                                </div>   
-                                <span>Sinopsis</span>                       
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                </div>
-                                <div>
-                                    <span>Estreno</span>
-                                    <input type="text" class="form-control" id="" placeholder="fecha de estreno">
-                                </div>
-                                <div>
-                                    <span>Valor ticket</span>
-                                    <input type="number" class="form-control" id="" placeholder="valor ticket">
-                                </div>
-                                <div>
-                                    <span>Sala</span>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected>Seleccione una opción</option>
-                                        <option value="1">data</option>
-                                        <option value="2">data</option>
-                                        <option value="3">data</option>
-                                    </select>                                   
-                                </div>   
-                                <div class="mb-3">
-                                    <label class="form-label">Imagen de la película</label>
-                                    <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly v-model="newCardImg">
-                                    <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"  data-bs-target="#modalseleccionar">
-                                        Seleccionar imagen
-                                    </button>
-                                </div>                     
-                            </div>
-                            <div class="modal-footer" id="footerModal">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-warning">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- finalModalPeliculas -->
-            <section id="cardPelis">
-                <!-- Modal seleccionar imagenes-->
-                <div class="modal fade" id="modalseleccionar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <h5 class="modal-title text-center" id="exampleModalLabel">Seleccionar Imagen</h5>
-                                <button type="button" class="btn btn-dark back" data-bs-toggle="modal"  data-bs-target="#pelis">Regresar <i class="fa-solid fa-rotate-left"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
-                                                <img src="../img/minions2Card.jpg" class="card-img-top" alt="selectimg" @click="selectImages('../img/minions2Card.jpg', '../img/minions2.jpg')">
-                                                <div class="card-body">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
-                                                <img src="../img/buzzlLightyearCard.jpg" class="card-img-top" alt="selectimg" @click="selectImages('../img/buzzlLightyearCard.jpg', '../img/buzzlLightyear.jpg')">
-                                                <div class="card-body">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
-                                                <img src="../img/thorAmorYTruenoCard.png" class="card-img-top" alt="selectimg" @click="selectImages('../img/thorAmorYTruenoCard.png', '../img/thorAmorYTrueno.jpg')">
-                                                <div class="card-body">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
-                                            <div class="card" data-bs-toggle="modal"  data-bs-target="#pelis">
-                                                <img src="../img/jurassincWorldCard.jpg" class="card-img-top" alt="selectimg" @click="selectImages('../img/jurassincWorldCard.jpg', '../img/jurassincWorld.jpg')">
-                                                <div class="card-body">
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    id="closeEdit">Cerrar</button>
+                                <button type="button" class="btn btn-warning" @click="editUser">Guardar</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Modal seleccionar imagenes-->
-            </section>
-            <!-- CardlSalas -->
-            <section id="cartelera" class="mt-4" v-if="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center text-uppercase">
-                            <h1 class="menu-title">Salas</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in rooms" :key="index">
-                            <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
-                                <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger" v-text=""></span></h5>
-                                <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala">                                                      
-                                    <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>                                    
-                                    <h6 class="card-title">No. Asientos: <span v-text="item.amountChairs"></span></h6>                                                                    
-                                    <h6 class="card-title">Pelicula Asignada: <span v-text="item.movie"></span></h6>                       
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal" data-bs-target="#modalAgregarPelicula" @click="roomIndex(index)">Asignar Pelicula</button> 
-                                        <button type="button" class="btn btn-danger col-5 mx-auto" @click="delRoom(item,index)">Eliminar sala</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal  Agregar pelicula-sala-->
-                <div class="modal fade" id="modalAgregarPelicula" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Agregar Pelicula</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <select class="form-select" aria-label="Default select example" v-model="optionMovie">
-                                        <option :value="item.title" v-for="(item, index) in movies" v-text="item.title"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="closeAssignMovie">Cerrar</button>
-                                <button type="button" class="btn btn-warning" @click="assignMovie">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Modal Agregar pelicula-sala-->
-                <!-- Modal  Agregar pelicula-sala-->
-                <div class="modal fade" id="verSala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Vista Sala</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                    id="closeAssignMovie">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Modal Agregar pelicula-sala-->
-            </section>
-            <!-- finalCardSalas -->
-            <!-- CardPeliculas -->
-            <section id="cartelera" class="mt-4" v-if="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center text-uppercase">
-                            <h1 class="menu-title">PELÍCULAS</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
-                            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                                <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
-                                <div class="card-body">                                                                                                     
-                                    <h6 class="card-title">Género: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Estreno: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Duración: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Sala: <span v-text=""></span></h6>                                                                    
-                                    <h6 class="card-title">Valor ticket: <span v-text=""></span></h6>                                                                    
-                                </div>
-                            </div>
-                            <hr>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- FinCardPeliculas -->
-                        <!-- FOOTER -->
-                        <footer id="footer" class="pb-4 pt-4">
+            <!--  /Modal Edit usuario-->
+        </section>
+        <!-- modalSalas -->
+        <section>
+            <div class="modal fade" id="salas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title col-11 text-center" id="exampleModalLabel">SALAS</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <span>Nombre</span>
+                                <input type="text" class="form-control" id="" placeholder="nombre de la sala"
+                                    v-model="newRoom.roomCode">
+                            </div>
+                            <div>
+                                <span>Cantidad Asientos</span>
+                                <input type="number" class="form-control" id="" placeholder="número de asientos"
+                                    v-model="newRoom.amountChairs">
+                            </div>
+                        </div>
+                        <div class="modal-footer" id="footerModal">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="closeRoomModal">Cerrar</button>
+                            <button type="button" class="btn btn-warning" @click="addRoom">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- finalModalSalas -->
+        <!-- modalPelicula -->
+        <section>
+            <div class="modal fade" id="pelis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title col-11 text-center" id="exampleModalLabel">PELÍCULAS</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <span>Nombre</span>
+                                <input type="text" class="form-control" id="" placeholder="nombre de la película">
+                            </div>
+                            <div>
+                                <span>Género</span>
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Seleccione una opción</option>
+                                    <option value="1">Terror</option>
+                                    <option value="2">Comedia</option>
+                                    <option value="3">Ciencia ficción</option>
+                                </select>
+                            </div>
+                            <div>
+                                <span>Duración</span>
+                                <input type="text" class="form-control" id="" placeholder="tiempo de duración">
+                            </div>
+                            <span>Sinopsis</span>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here"
+                                    id="floatingTextarea"></textarea>
+                            </div>
+                            <div>
+                                <span>Estreno</span>
+                                <input type="text" class="form-control" id="" placeholder="fecha de estreno">
+                            </div>
+                            <div>
+                                <span>Valor ticket</span>
+                                <input type="number" class="form-control" id="" placeholder="valor ticket">
+                            </div>
+                            <div>
+                                <span>Sala</span>
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Seleccione una opción</option>
+                                    <option value="1">data</option>
+                                    <option value="2">data</option>
+                                    <option value="3">data</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Imagen de la película</label>
+                                <input type="text" class="form-control" placeholder="Imagen no seleccionada" readonly
+                                    v-model="newCardImg">
+                                <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#modalseleccionar">
+                                    Seleccionar imagen
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-footer" id="footerModal">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-warning">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- finalModalPeliculas -->
+        <section id="cardPelis">
+            <!-- Modal seleccionar imagenes-->
+            <div class="modal fade" id="modalseleccionar" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Seleccionar Imagen</h5>
+                            <button type="button" class="btn btn-dark back" data-bs-toggle="modal"
+                                data-bs-target="#pelis">Regresar <i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                        <div class="modal-body">
                             <div class="container">
-                                <div class="row text-center">
-                                    <div class="col-12 col-lg col-md">
-                                        <h5 class="text-center mt-2 mb-2">
-                                            <a
-                                                href="https://www.ionos.es/digitalguide/paginas-web/derecho-digital/aviso-legal-obligatorio-todo-lo-que-necesitas-saber/#:~:text=Seg%C3%BAn%20el%20art%C3%ADculo%2010%20de,Mercantil%20si%20fuese%20el%20caso.">Información
-                                                Legal</a>
-                                        </h5>
+                                <div class="row">
+                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
+                                            <img src="../img/minions2Card.jpg" class="card-img-top" alt="selectimg"
+                                                @click="selectImages('../img/minions2Card.jpg', '../img/minions2.jpg')">
+                                            <div class="card-body">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-lg col-md">
-                                        <h5 class="text-center mt-2 mb-2">
-                                            <a href="https://github.com/emerson14/cinema">Contacto</a>
-                                        </h5>
+                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
+                                            <img src="../img/buzzlLightyearCard.jpg" class="card-img-top"
+                                                alt="selectimg"
+                                                @click="selectImages('../img/buzzlLightyearCard.jpg', '../img/buzzlLightyear.jpg')">
+                                            <div class="card-body">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-lg col-md">
-                        
-                                        <img src="../img/logocinema.png" style="width: 120px;" alt="">
-                        
+                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
+                                            <img src="../img/thorAmorYTruenoCard.png" class="card-img-top"
+                                                alt="selectimg"
+                                                @click="selectImages('../img/thorAmorYTruenoCard.png', '../img/thorAmorYTrueno.jpg')">
+                                            <div class="card-body">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-lg col-md">
-                                        <h5 class="text-center mt-2 mb-2">
-                                            <a href="#">PQRS</a>
-                                        </h5>
-                                    </div>
-                                    <div class="col-12 col-lg col-md">
-                                        <h5 class="text-center mt-2 mb-2">
-                                            Siguenos en redes sociales:
-                                            <a href="https://www.facebook.com/profile.php?id=100063570341400"><i
-                                                    class="fab fa-instagram-square"></i></a>
-                                            <a href="https://www.facebook.com/profile.php?id=100063570341400"><i
-                                                    class="fab fa-facebook-square"></i></a>
-                        
-                        
-                                        </h5>
+                                    <div class="col-6 col-md-6 col-lg-6 mt-3 mb-4">
+                                        <div class="card" data-bs-toggle="modal" data-bs-target="#pelis">
+                                            <img src="../img/jurassincWorldCard.jpg" class="card-img-top"
+                                                alt="selectimg"
+                                                @click="selectImages('../img/jurassincWorldCard.jpg', '../img/jurassincWorld.jpg')">
+                                            <div class="card-body">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <h5 class="text-center mt-4">© 2022 Cinema Derechos Reservados</h5>
-                                <h5 class="text-center mt-4">CINEMA</h5>
-                        
                             </div>
-                        </footer>
-                        <!-- /FOOTER -->
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    </body>
-    <script src="../js/vue.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../js/admin.js"></script>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Modal seleccionar imagenes-->
+        </section>
+        <!-- CardlSalas -->
+        <section id="cartelera" class="mt-4" v-if="">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center text-uppercase">
+                        <h1 class="menu-title">Salas</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in rooms" :key="index">
+                        <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
+                            <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger"
+                                    v-text=""></span></h5>
+                            <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala">
+                                <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>
+                                <h6 class="card-title">No. Asientos: <span v-text="item.amountChairs"></span></h6>
+                                <h6 class="card-title">Película Asignada: <span v-text="item.movie"></span></h6>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <button type="button" class="btn btn-warning col-5 mx-auto" data-bs-toggle="modal"
+                                        data-bs-target="#modalAgregarPelicula" @click="roomIndex(index)">Asignar
+                                        Película</button>
+                                    <button type="button" class="btn btn-danger col-5 mx-auto"
+                                        @click="delRoom(item,index)">Eliminar sala</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal  Agregar pelicula-sala-->
+            <div class="modal fade" id="modalAgregarPelicula" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Agregar Película</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <select class="form-select" aria-label="Default select example" v-model="optionMovie">
+                                    <option :value="item.title" v-for="(item, index) in movies" v-text="item.title">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                id="closeAssignMovie">Cerrar</button>
+                            <button type="button" class="btn btn-warning" @click="assignMovie">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Modal Agregar pelicula-sala-->
+            <!-- Modal  Agregar pelicula-sala-->
+            <div class="modal fade" id="verSala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Vista Sala</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                id="closeAssignMovie">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Modal Agregar pelicula-sala-->
+        </section>
+        <!-- finalCardSalas -->
+        <!-- CardPeliculas -->
+        <section id="cartelera" class="mt-4" v-if="">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center text-uppercase">
+                        <h1 class="menu-title">PELÍCULAS</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="" :key="">
+                        <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                            <h5 class="text-center">TITULO<span class="text-danger" v-text=""></span></h5>
+                            <div class="card-body">
+                                <h6 class="card-title">Género: <span v-text=""></span></h6>
+                                <h6 class="card-title">Estreno: <span v-text=""></span></h6>
+                                <h6 class="card-title">Duración: <span v-text=""></span></h6>
+                                <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>
+                                <h6 class="card-title">Sala: <span v-text=""></span></h6>
+                                <h6 class="card-title">Valor ticket: <span v-text=""></span></h6>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FinCardPeliculas -->
+        <!-- FOOTER -->
+        <footer id="footer" class="pb-4 pt-4">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12 col-lg col-md">
+                        <h5 class="text-center mt-2 mb-2">
+                            <a
+                                href="https://www.ionos.es/digitalguide/paginas-web/derecho-digital/aviso-legal-obligatorio-todo-lo-que-necesitas-saber/#:~:text=Seg%C3%BAn%20el%20art%C3%ADculo%2010%20de,Mercantil%20si%20fuese%20el%20caso.">Información
+                                Legal</a>
+                        </h5>
+                    </div>
+                    <div class="col-12 col-lg col-md">
+                        <h5 class="text-center mt-2 mb-2">
+                            <a href="https://github.com/emerson14/cinema">Contacto</a>
+                        </h5>
+                    </div>
+                    <div class="col-12 col-lg col-md">
+
+                        <img src="../img/logocinema.png" style="width: 120px;" alt="">
+
+                    </div>
+                    <div class="col-12 col-lg col-md">
+                        <h5 class="text-center mt-2 mb-2">
+                            <a href="#">PQRS</a>
+                        </h5>
+                    </div>
+                    <div class="col-12 col-lg col-md">
+                        <h5 class="text-center mt-2 mb-2">
+                            Siguenos en redes sociales:
+                            <a href="https://www.facebook.com/profile.php?id=100063570341400"><i
+                                    class="fab fa-instagram-square"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100063570341400"><i
+                                    class="fab fa-facebook-square"></i></a>
+
+
+                        </h5>
+                    </div>
+                </div>
+                <h5 class="text-center mt-4">© 2022 Cinema Derechos Reservados</h5>
+                <h5 class="text-center mt-4">CINEMA</h5>
+
+            </div>
+        </footer>
+        <!-- /FOOTER -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+<script src="../js/vue.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/admin.js"></script>
+
 </html>
