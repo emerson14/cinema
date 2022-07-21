@@ -100,7 +100,8 @@ var app = new Vue({
         newCardImg: '',
         newWallpaper: '',
         optionMovie: '',// guarda la opción seleccionada al asignar una pelicula a una sala
-        roomPos: 0,
+        indexRoom: 0,//guarda la posición de la sala para tener la vista de sillas ocupadas en el modal de vista sala
+        roomPos: 0,//guarda la posición de la sala para asignarle una pelicula en el modal asignar pelicula
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
@@ -225,6 +226,7 @@ var app = new Vue({
                 }
             })
         },
+<<<<<<< HEAD
 
 
         delMovie(item,index){
@@ -255,6 +257,11 @@ var app = new Vue({
             })
         },
 
+=======
+        showRooms(index){
+            this.indexRoom = index;
+        },
+>>>>>>> dc32f54d074003ebf4895a2a1703e1b0058013c6
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
