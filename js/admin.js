@@ -226,7 +226,6 @@ var app = new Vue({
                 }
             })
         },
-<<<<<<< HEAD
 
 
         delMovie(item,index){
@@ -257,11 +256,9 @@ var app = new Vue({
             })
         },
 
-=======
         showRooms(index){
             this.indexRoom = index;
         },
->>>>>>> dc32f54d074003ebf4895a2a1703e1b0058013c6
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
