@@ -404,7 +404,7 @@
                         <h1 class="menu-title">Salas</h1>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" v-if="rooms.length > 0">
                     <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in rooms" :key="index">
                         <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
                             <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger"
@@ -426,6 +426,9 @@
                         </div>
                         <hr>
                     </div>
+                </div>
+                <div v-else>
+                    <h1 class="text-center mt-5 mb-5">No se ha creado ninguna sala</h1>
                 </div>
             </div>
             <!-- Modal  Agregar pelicula-sala-->
@@ -456,7 +459,7 @@
             <!-- /Modal Agregar pelicula-sala-->
             <!-- Modal  vista-sala -->
             <div class="modal fade" id="verSala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                aria-labelledby="staticBackdropLabel" aria-hidden="true" v-if="rooms.length > 0">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
