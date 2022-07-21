@@ -1,20 +1,9 @@
 //LOGIC
 
 var app = new Vue({
-    el: '#app',
+    el: '#admin',
     data: {
-        users: [
-            {
-                name: 'Anonymous',
-                lastName: 'Zero',
-                address: '000-000',
-                phoneNumber: '000-000',
-                email: 'admin@algo.com',
-                password: '1234',
-                role: 'superAdmin',
-                status: 'inactive',
-            },
-        ],
+        users: [ ],
         newUser: {
             name: '',
             lastName: '',
@@ -68,31 +57,30 @@ var app = new Vue({
             { number: 2, status: 'available' },
             { number: 3, status: 'available' }, 
             { number: 4, status: 'available' }
-        ],},
+        ], amountChairs: 4, movie: 'testMovie1'},
             {roomCode: 'A2', chairs: [
             { number: 1, status: 'available' },
             { number: 2, status: 'available' },
             { number: 3, status: 'available' }, 
             { number: 4, status: 'available' }
-        ],}
+        ], amountChairs: 4, movie: 'testMovie2'}
         ],
         newRoom: {
-            roomCode: '', chairs: [], amountChairs: 0,
+            roomCode: '', chairs: [], amountChairs: 0, movie: '',
         },
-        confirmPass: '',//para el input de confirmación de contraseña
-        email: '',
-        password: '',
-        user: '',
-        code: '',
-        confirmCode: '',
-        genCode: '',
-        startTimer: '',
-        seconds: 30,
-        option: '',
-        rpos: 0,
-        openPayment: false,
-        nTickets: 0,
-        pMethod: '',
+        user: null,
+        confirmPass: '',
+        user2: {
+            name: '',
+            lastName: '',
+            address: '',
+            phoneNumber: '',
+            email: '',
+            password: '',
+            role: '',
+        },
+        newCardImg: '',
+        newWallpaper: '',
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
         addUser(){
@@ -102,12 +90,14 @@ var app = new Vue({
                 this.newUser.email.length > 0 && this.newUser.password.length > 0
                 ) {
                     if (this.confirmPass === this.newUser.password) {
+                        this.newUser.id =  this.users.length + 1;
                         this.users.push({
                             ...this.newUser
                         });
                         this.clearFields();
-                        //this.updateLocalStorage();
-                        this.mensaje("Su cuenta ha sido creada, un código de valicación fue enviado a su correo", "success");
+                        this.mensaje("Cuenta creada con exito", "success");
+                        let btn = document.getElementById('closeAddUser');
+                        btn.click();
                         this.updateLocalStorage();
                     }else{
                         this.mensaje("La contraseña ingresada y la confirmación no coinciden", "error");
@@ -119,6 +109,7 @@ var app = new Vue({
         },
         clearFields(){//limpiará los campos del formulario de registro de usuarios al crear la cuenta
             this.newUser = {
+                id: this.users.length + 1,
                 name: '',
                 lastName: '',
                 address: '',
@@ -133,9 +124,16 @@ var app = new Vue({
             //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
             this.movies.push({...this.newMovie});
         },
+        selectImages(cardImg, wallpaper){//cardImg será para mostrar en el card y wallpaper para el carousel
+            this.newCardImg = cardImg;
+            this.newWallpaper = wallpaper;
+            //al dar click a guardar en el modal peliculas esta información debe guardarse en el array movies
+            //para luego recorrer el array y mostrar los cards disponibles y las imagenes del carrusel
+        },
         addRoom(){
             if(this.newRoom.roomCode.length && this.newRoom.amountChairs > 0) {
                 this.rooms.push({...this.newRoom});
+                this.rooms[this.rooms.length - 1].roomCode = this.rooms[this.rooms.length - 1].roomCode.toUpperCase();
                 if(this.newRoom.amountChairs > 0){
                     for (let i = 1; i <= this.newRoom.amountChairs; i++) {
                         this.rooms[this.rooms.length - 1].chairs.push({number: i, status: 'available'});
@@ -143,6 +141,8 @@ var app = new Vue({
                     this.newRoom.roomCode = '';
                     this.newRoom.amountChairs = 0;
                     this.updateLocalStorage();
+                    let btn = document.getElementById('closeRoomModal');
+                    btn.click();
                     this.mensaje('Sala creada', 'success');
                 }else{
                     this.mensaje('La cantidad de sillas debe ser mayor a cero', 'error');
@@ -150,65 +150,6 @@ var app = new Vue({
             }else{
                 this.mensaje('Ingrese todos los campos', 'error');
             }
-        },
-        login(){
-
-            if(this.email == '' || this.password == ''){
-                this.mensaje('Ingrese todos los campos', 'error');
-                return;
-            }
-
-            this.users.forEach(user => {
-
-                if(this.email == user.email && this.password == user.password){
-                    this.user = user;
-                    this.updateLocalStorage();
-                }
-                
-            });
-
-            if(this.user == ''){
-                this.mensaje('Los datos ingresados son incorrectos', 'error');
-                this.email = '';
-                this.password = '';
-            }
-            else{
-                if(this.user.status == 'inactive' ){
-
-                    const genCode2 = () => {
-                        this.generateCode();
-                    }
-
-                    const myTimer = () => {
-                        this.timer();
-                    }
-
-                    this.generateCode();
-
-                    this.genCode = setInterval(genCode2, 30000);
-                    this.startTimer = setInterval(myTimer, 1000);
-                   
-
-                    //se abre la modal y ese boton redirige a una nueva funcion 'validateCode'
-                    btn = document.getElementById('code');
-                    btn.click();
-                    this.email = '';
-                    this.password = '';
-                   
-                }
-                else{
-
-                    this.mensaje('Ha iniciado sesión correctamente', 'success');
-                    this.email = '';
-                    this.password = '';
-                    setTimeout(function(){     
-                        window.location.href = "app.html";
-                    
-                    }.bind(this), 3000);
-
-                }
-            }
-
         },
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
@@ -227,8 +168,8 @@ var app = new Vue({
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.user = '';
-                    this.updateLocalStorage();
+                    this.user = null;
+                    localStorage.removeItem("user");
                     this.mensaje("Se ha cerrado la sesión", "success");
                     setTimeout(function(){ location.href = "login.html" }, 1500);
                 } else if (
@@ -237,107 +178,79 @@ var app = new Vue({
                 }
             })
         },
-        timer(){
+
+        loadUser(user){
             
-            if(this.seconds != 0){
-                this.seconds -= 1;
-                console.log(this.seconds);
-            }else{
-                this.seconds = 30;
-                console.log(this.seconds);
-            }
-        },
-        validateCode(){
+            this.user2.id = user.id;
+            this.user2.name = user.name;
+            this.user2.lastName = user.lastName;
+            this.user2.address = user.address;
+            this.user2.phoneNumber = user.phoneNumber;
+            this.user2.email = user.email;
+            this.user2.role = user.role;
 
-            if(this.code == ''){
-                this.mensaje('Ingrese el codigo enviado', 'error');
-                return;
+        },
+
+        editUser(){
             
-            }
-            if(this.code == this.confirmCode){
-                clearInterval(this.genCode);
-                clearInterval(this.startTimer);
-                this.startTimer = '',
-                this.mensaje('Su cuenta ha sido activada', 'succes');
-                this.user.status = 'active';
-                this.updateLocalStorage();
-
-                this.email = '';
-                this.password = '';
-                setTimeout(function(){     
-                    window.location.href = "app.html";
-              
-                
-                }.bind(this), 3000);
-            }
-            else{
-                this.mensaje('El codigo es incorrecto', 'error');
-                return;
-            }
-        },
-
-        generateCode(){
-            let x = '';
-                    for(let i = 0; i < 6; i++){
-                        let r = Math.floor(Math.random()* 9);
-                        x += r;
-                    }
-                    this.code = x;
-                    console.log(this.code);
-        },
-
-
-
-
-
-
-        getRoomIndex(){
-            const index = this.rooms.findIndex((object) => {
-                return object.roomCode == this.option;
-            });
-            this.rpos = index;
-        },
-        chairStatus(item, index){
-            if (this.nTickets > 0) {
-                this.nTickets -= 1;
-                item.status = 'unavaliable';
-                this.chairPos = index;
-                if (this.nTickets == 0) {
-                    this.mensaje('Ha alcanzado la cantidad máxima de puestos según sus tickets', 'warning');
-                    setTimeout(() => { this.mensaje('Por favor haga click en comprar', 'warning'); }, 2500);
+            console.log('edittt');
+            this.users.forEach(user => {
+                if(this.user2.id == user.id){
+                    user.name = this.user2.name;
+                    user.lastName = this.user2.lastName;
+                    user.address = this.user2.address;
+                    user.phoneNumber = this.user2.phoneNumber;
+                    user.email = this.user2.email;
+                    user.role = this.user2.role;
                 }
-            }
-        },
-        saveChairStatus(){
-            if (this.pMethod.length > 0) {
-                this.mensaje('Pago exitoso, gracias por preferirnos!', 'success');
-                this.option = '';
-                this.openPayment = false;
-                this.pMethod = '',
-                this.updateLocalStorage();
-            }else{
-                this.mensaje('Por favor seleccione un método de pago', 'error');
-            }
-            
-        },
-        goToPay(){
-            if (this.nTickets == 0) {
-                switch (this.openPayment) {
-                    case true:
-                        this.openPayment = false;
-                        break;
-                    case false:
-                        this.openPayment = true;
-                        break;
-                
-                    default:
-                        break;
                 }
-            }else{
-                this.mensaje('Seleccione los puestos', 'warning');
-            }
-            
+                
+            );
+
+            this.updateLocalStorage();
+
+           
+            // this.user2.name = '';
+            // this.user2.lastName = '';
+            // this.user2.address = '';
+            // this.user2.phoneNumber = '';
+            // this.user2.email ='';
+            // this.user2.role = '';
+
+            let btn = document.getElementById('closeEdit');
+            btn.click();
+
+
+            this.mensaje('El usuario ha sido modificado correctamente', 'succes');
         },
+        delUser(index){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })       
+            swalWithBootstrapButtons.fire({
+                title: '¿Estás seguro de que desea eliminar?',
+                text: "No podras revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Eliminar',
+                cancelButtonText: 'No, Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.users.splice(index, 1);
+                    this.updateLocalStorage();
+                    this.mensaje("El usuario fue eliminado", "success");
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                }
+            })
+        },
+
         mensaje: function (msj, icono) {//para enviar alerts de sweet alert
             const Toast = Swal.mixin({
                 toast: true,
@@ -368,11 +281,22 @@ var app = new Vue({
         }else{
             this.users = this.users;
         }
+
         if (localStorage.getItem('user') !== null) {
             this.user = JSON.parse(localStorage.getItem('user'));
+            this.users.forEach(element => {
+                if(element.id == this.user.id){
+                  this.user = element;
+                  console.log("hola");
+                }  
+              });
         }else{
             this.user = '';
+            this.mensaje('No hay ningun usuario registrado, por favor ingresa sesion', 'error');
+            window.location.href = "login.html";
+
         }
+
         if (localStorage.getItem('rooms') !== null) {
             this.rooms = JSON.parse(localStorage.getItem('rooms'));
         }else{
