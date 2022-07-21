@@ -18,7 +18,10 @@
         <link rel="icon" href="../img/logocinema.ico">
     </head>
     <body class="body2">
-        <div id="app" v-if="showBody === true">
+        <div id="app">
+
+        
+            <div  v-if="showBody === true">
   
             <!-- HEADER -->
             <header>
@@ -244,8 +247,8 @@
                 </div>
             </footer>
             <!-- /FOOTER -->
-        </div>
-        <div id="error401">
+            </div>
+            <div id="error401" v-else>
             <div class="container">
                 <div class="row">
                     <dov class="col-12 notvaltext">
@@ -253,6 +256,7 @@
                         <h1 class="text-center notvalid">UNAUTHORIZED</h1>
                     </dov>
                 </div>
+            </div>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
