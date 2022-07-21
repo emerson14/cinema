@@ -465,6 +465,19 @@
                         </div>
                         <div class="modal-body">
                             <div class="container" id="sillas">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p><strong>Vacant Chairs: </strong></p>
+                                        <input type="checkbox" id="check_example1" name="check" value="" disabled>
+                                        <label for="check_example1">1</label>
+                                    </div>
+                                    <div class="disabled col-6">
+                                        <p><strong>Occupied Chairs: </strong></p>
+                                        <input type="checkbox" id="check_example1" name="check" value="" disabled>
+                                        <label for="check_example1">1</label>
+                                    </div>
+                                </div>
+                                <hr>
                                 <div class="row mx-auto">
                                     <ul>
                                         <li class="col-2" v-for="(item, index) in rooms[indexRoom].chairs" :key="index">
