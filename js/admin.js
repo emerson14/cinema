@@ -189,12 +189,15 @@ var app = new Vue({
         },
         assignMovie(){
             if (this.optionMovie != '') {
-                this.rooms[this.roomPos].movie = this.optionMovie.title;
-                this.mensaje(`Se ha asignado la pelicula ${this.optionMovie.title} a la sala ${this.rooms[this.roomPos].roomCode}`, 'success');
-                this.optionMovie.sala =  this.rooms[this.roomPos].roomCode;
+                this.rooms[this.roomPos].movie = this.optionMovie;
+                const index = this.movies.findIndex((e) => {
+                    return e.title == this.optionMovie;
+                });
+                this.movies[index].sala = this.rooms[this.roomPos].roomCode;
                 this.updateLocalStorage();
+                this.mensaje(`Se ha asignado la pelicula ${this.optionMovie} a la sala ${this.rooms[this.roomPos].roomCode}`, 'success');
                 let btnClose = document.getElementById('closeAssignMovie');
-            btnClose.click();
+                btnClose.click();
             }else{
                 this.mensaje('Seleccione una pelicula', 'error');
             }
