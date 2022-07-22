@@ -3,7 +3,7 @@
 var app = new Vue({
     el: '#admin',
     data: {
-        users: [ ],
+        users: [],
         newUser: {
             name: '',
             lastName: '',
@@ -29,63 +29,8 @@ var app = new Vue({
             occupChairs: 0,
             class: 'carousel-item',
         },
-        movies: [
-            {
-            title: 'Buzz Lightyear',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/buzzlLightyearCard.jpg',
-            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.',
-            imgW: '../img/buzzlLightyear.jpg',
-            sala: ''
-            },
-            {
-            title: 'Jurassic World',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/jurassincWorldCard.jpg',
-            imgW: '../img/jurassincWorld.jpg',
-            sala: '',
-            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
-            
-        },
-            {
-            title: 'Minions',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/minions2Card.jpg',
-            imgW: '../img/minions2.jpg',
-            sala: '',
-            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
-            },
-            {
-            title: 'Thor Amor y Trueno',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/thorAmorYTruenoCard.png',
-            imgW: '../img/thorAmorYTrueno.jpg',
-            sala: '',
-            synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
-            }
-        ],
-        rooms: [
-            {roomCode: 'A1', chairs: [
-            { number: 1, status: 'available' },
-            { number: 2, status: 'available' },
-            { number: 3, status: 'available' }, 
-            { number: 4, status: 'available' }
-        ], amountChairs: 4, movie: 'testMovie1'},
-            {roomCode: 'A2', chairs: [
-            { number: 1, status: 'available' },
-            { number: 2, status: 'available' },
-            { number: 3, status: 'available' }, 
-            { number: 4, status: 'available' }
-        ], amountChairs: 4, movie: 'testMovie2'}
-        ],
+        movies: [],
+        rooms: [],
         newRoom: {
             roomCode: '', chairs: [], amountChairs: 0, movie: '',
         },
@@ -164,20 +109,24 @@ var app = new Vue({
         },
         addRoom(){
             if(this.newRoom.roomCode.length && this.newRoom.amountChairs > 0) {
-                this.rooms.push({...this.newRoom});
-                this.rooms[this.rooms.length - 1].roomCode = this.rooms[this.rooms.length - 1].roomCode.toUpperCase();
-                if(this.newRoom.amountChairs > 0){
-                    for (let i = 1; i <= this.newRoom.amountChairs; i++) {
-                        this.rooms[this.rooms.length - 1].chairs.push({number: i, status: 'available'});
+                if (this.newRoom.amountChairs % 6 == 0) {
+                    this.rooms.push({...this.newRoom});
+                    this.rooms[this.rooms.length - 1].roomCode = this.rooms[this.rooms.length - 1].roomCode.toUpperCase();
+                    if(this.newRoom.amountChairs > 0){
+                        for (let i = 1; i <= this.newRoom.amountChairs; i++) {
+                            this.rooms[this.rooms.length - 1].chairs.push({number: i, status: 'available'});
+                        }
+                        this.newRoom.roomCode = '';
+                        this.newRoom.amountChairs = 0;
+                        this.updateLocalStorage();
+                        let btn = document.getElementById('closeRoomModal');
+                        btn.click();
+                        this.mensaje('Sala creada', 'success');
+                    }else{
+                        this.mensaje('La cantidad de sillas debe ser mayor a cero', 'error');
                     }
-                    this.newRoom.roomCode = '';
-                    this.newRoom.amountChairs = 0;
-                    this.updateLocalStorage();
-                    let btn = document.getElementById('closeRoomModal');
-                    btn.click();
-                    this.mensaje('Sala creada', 'success');
                 }else{
-                    this.mensaje('La cantidad de sillas debe ser mayor a cero', 'error');
+                    this.mensaje('Ingrese una cantidad de sillas multiplo de 6', 'error');
                 }
             }else{
                 this.mensaje('Ingrese todos los campos', 'error');

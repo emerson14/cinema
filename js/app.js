@@ -4,68 +4,10 @@ var app = new Vue({
     el: '#app',
     data: {
         users: [],
-        movies: [//remporalmente con datos quemados, mientras se adpta el frontend para la creacion de peliculas por parte del admin
-            {
-                title: 'Buzz Lightyear',
-                release: '14/07/2022',
-                duration: '2 hours',
-                gender: 'test',
-                img: '../img/buzzlLightyearCard.jpg',
-                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.',
-                imgW: '../img/buzzlLightyear.jpg',
-                sala: '',
-                class: 'carousel-item active'
-            },
-            {
-                title: 'Jurassic World',
-                release: '14/07/2022',
-                duration: '2 hours',
-                gender: 'test',
-                img: '../img/jurassincWorldCard.jpg',
-                imgW: '../img/jurassincWorld.jpg',
-                sala: '',
-                class: 'carousel-item',
-                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
-            },
-            {
-                title: 'Minions',
-                release: '14/07/2022',
-                duration: '2 hours',
-                gender: 'test',
-                img: '../img/minions2Card.jpg',
-                imgW: '../img/minions2.jpg',
-                sala: '',
-                class: 'carousel-item',
-                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
-            },
-            {
-                title: 'Thor Amor y Trueno',
-                release: '14/07/2022',
-                duration: '2 hours',
-                gender: 'test',
-                img: '../img/thorAmorYTruenoCard.png',
-                imgW: '../img/thorAmorYTrueno.jpg',
-                sala: '',
-                class: 'carousel-item',
-                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
-            }
-        ],
+        movies: [],
         ticket: 9000,
         total: 0,
-        rooms: [
-            {roomCode: 'A1', chairs: [
-            { number: 1, status: 'available' },
-            { number: 2, status: 'available' },
-            { number: 3, status: 'available' }, 
-            { number: 4, status: 'available' }
-        ],},
-            {roomCode: 'A2', chairs: [
-            { number: 1, status: 'available' },
-            { number: 2, status: 'available' },
-            { number: 3, status: 'available' }, 
-            { number: 4, status: 'available' }
-        ],}
-        ],
+        rooms: [],
         user: null,
         option: '',
         rPos: 0,

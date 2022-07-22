@@ -17,7 +17,6 @@ var app = new Vue({
             },
         ],
         newUser: {
-           
             name: '',
             lastName: '',
             address: '',
@@ -182,6 +181,7 @@ var app = new Vue({
                         x += r;
                     }
                     this.code = x;
+                    console.log(this.code);
         },
 
 
