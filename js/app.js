@@ -3,40 +3,55 @@
 var app = new Vue({
     el: '#app',
     data: {
-        users: [
-          
-        ],
-
+        users: [],
         movies: [//remporalmente con datos quemados, mientras se adpta el frontend para la creacion de peliculas por parte del admin
             {
-            title: 'Buzz Lightyear',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/buzzlLightyearCard.jpg'
+                title: 'Buzz Lightyear',
+                release: '14/07/2022',
+                duration: '2 hours',
+                gender: 'test',
+                img: '../img/buzzlLightyearCard.jpg',
+                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.',
+                imgW: '../img/buzzlLightyear.jpg',
+                sala: '',
+                class: 'carousel-item active'
             },
             {
-            title: 'Jurassic World',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/jurassincWorldCard.jpg'
+                title: 'Jurassic World',
+                release: '14/07/2022',
+                duration: '2 hours',
+                gender: 'test',
+                img: '../img/jurassincWorldCard.jpg',
+                imgW: '../img/jurassincWorld.jpg',
+                sala: '',
+                class: 'carousel-item',
+                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
             },
             {
-            title: 'Minions',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/minions2Card.jpg'
+                title: 'Minions',
+                release: '14/07/2022',
+                duration: '2 hours',
+                gender: 'test',
+                img: '../img/minions2Card.jpg',
+                imgW: '../img/minions2.jpg',
+                sala: '',
+                class: 'carousel-item',
+                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
             },
             {
-            title: 'Thor Amor y Trueno',
-            release: '14/07/2022',
-            duration: '2 hours',
-            gender: 'test',
-            img: '../img/thorAmorYTruenoCard.png'
+                title: 'Thor Amor y Trueno',
+                release: '14/07/2022',
+                duration: '2 hours',
+                gender: 'test',
+                img: '../img/thorAmorYTruenoCard.png',
+                imgW: '../img/thorAmorYTrueno.jpg',
+                sala: '',
+                class: 'carousel-item',
+                synopsis: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque dolores aliquam facilis, possimus dolore, cum eligendi tempore ipsum consectetur molestias saepe dolorem, unde vero. Quae culpa maiores excepturi nostrum quisquam.'
             }
         ],
+        ticket: 9000,
+        total: 0,
         rooms: [
             {roomCode: 'A1', chairs: [
             { number: 1, status: 'available' },
@@ -51,7 +66,6 @@ var app = new Vue({
             { number: 4, status: 'available' }
         ],}
         ],
-       
         user: null,
         option: '',
         rpos: 0,
@@ -61,10 +75,6 @@ var app = new Vue({
         showBody: true,
     },
     methods: {//metodos a trabajar en el proyecto -- VARIABLES EN camelCase
-       
-      
-       
-     
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -98,17 +108,16 @@ var app = new Vue({
                 return object.roomCode == this.option;
             });
             this.rpos = index;
+            let test = document.querySelectorAll('.checkRoom');
+            console.log(test);
         },
-
-        chairStatus(item, index){
+        getTotal(){
+            this.total = this.nTickets*this.ticket;
+        },
+        chairStatus(item){
             if (this.nTickets > 0) {
                 this.nTickets -= 1;
-                item.status = 'unavaliable';
-                this.chairPos = index;
-                if (this.nTickets == 0) {
-                    this.mensaje('Ha alcanzado la cantidad máxima de puestos según sus tickets', 'warning');
-                    setTimeout(() => { this.mensaje('Por favor haga click en comprar', 'warning'); }, 2500);
-                }
+                item.status = 'unavailable';
             }
         },
         saveChairStatus(){
@@ -140,6 +149,46 @@ var app = new Vue({
                 this.mensaje('Seleccione los puestos', 'warning');
             }
             
+        },
+        cancelPayment(){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })       
+            swalWithBootstrapButtons.fire({
+                title: `¿Está seguro de que desea cancelar la compra?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Cancelar',
+                cancelButtonText: 'No, Continuar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.nTickets = 0;
+                    /*this.rooms.forEach(e => {
+                            e.chairs.forEach(item => item.status = 'available')
+                    });*/
+                    this.option = '';
+                    this.pMethod = '';
+                    this.openPayment = false;
+                    this.rpos = 0;
+                    let btnX = document.getElementById('closeBuyTickets');
+                    btnX.click();
+                    this.mensaje("Compra cancelada con exito", "success");
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                }
+            })
+        },
+        returnTicket(){
+            this.nTickets = 0;
+            /*this.rooms.forEach(e => {
+                e.chairs.forEach(item => item.status = 'available')
+            });*/
         },
         mensaje: function (msj, icono) {//para enviar alerts de sweet alert
             const Toast = Swal.mixin({

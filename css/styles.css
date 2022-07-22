@@ -289,7 +289,7 @@ header{
 #sillas input[type="checkbox"]:checked + label {
     border: 1px solid white;
     color: white;
-    background-color: black;
+    background-color: gray;
 }
 
 #sillas .disabled input[type="checkbox"] + label{

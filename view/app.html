@@ -57,33 +57,28 @@
                 <main id="main" class="">
                     <!-- Carusel -->
                     <div id="carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-pause="false">
-                        <div class="carousel-inner">
+                        <div class="carousel-inner" v-if="movies.length > 0">
+                            <div :class="item.class" v-for="(item, index) in movies" :key="index">
+                                <img :src="item.imgW" class="d-block w-100" alt="Images carousel">
+                                <div class="carousel-caption p-5 mb-5">
+                                    <h2 class="fw-bold" v-text="item.title"></h2>
+                                    <p class="h4">Estreno: <span v-text="item.release"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-inner" v-else>
                             <div class="carousel-item active">
-                                <img src="../img/buzzlLightyear.jpg" class="d-block w-100" alt="Images carousel">
+                                <img src="../img/noMovies.jpg" class="d-block w-100" alt="Images carousel">
                                 <div class="carousel-caption p-5 mb-5">
-                                    <h2 class="fw-bold ">LIGHTYEAR</h2>
-                                    <p class="h4">Estreno: 16 de junio de 2022</p>
+                                    <h2 class="fw-bold">No se encontraron películas</h2>
+                                    <p class="h4">Estreno: <span>Undefined</span></p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../img/jurassincWorld.jpg" class="d-block w-100" alt="Images carousel">
+                                <img src="../img/noMovies2.jpg" class="d-block w-100" alt="Images carousel">
                                 <div class="carousel-caption p-5 mb-5">
-                                    <h2 class="fw-bold">Jurassic World: Dominion</h2>
-                                    <p class="h3">9 de junio de 2022</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="../img/minions2.jpg" class="d-block w-100" alt="Images carousel">
-                                <div class="carousel-caption p-5 mb-5">
-                                    <h2 class="fw-bold ">Minions: nace un villano</h2>
-                                    <p class="h3">30 de junio de 2022</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="../img/thorAmorYTrueno.jpg" class="d-block w-100" alt="Images carousel">
-                                <div class="carousel-caption p-5 mb-5">
-                                    <h2 class="fw-bold ">Thor: amor y trueno</h2>
-                                    <p class="h3">7 de julio de 2022</p>
+                                    <h2 class="fw-bold">No se encontraron películas</h2>
+                                    <p class="h4">Estreno: <span>Undefined</span></p>
                                 </div>
                             </div>
                         </div>
@@ -98,18 +93,19 @@
                             <h1 class="menu-title">EN CARTELERA</h1>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" v-if="movies.length > 0">
                         <div class="col-md-6 col-lg-3 mt-3 mb-4" v-for="(item, index) in movies" :key="index">
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
                                 <img :src="item.img" class="card-img-top" alt="">
                                 <h5 class="text-center"><strong v-text="item.title"></strong></h5>
-                                <div class="card-body">                                                                     
-                                    <h6 class="card-title">Estreno: <span v-text="item.release"></span></h6>                                    
-                                    <h6 class="card-title">Genero: <span v-text="item.gender"></span></h6>                                    
+                                <div class="card-body">
+                                    <h6 class="card-title">Estreno: <span v-text="item.release"></span></h6>
+                                    <h6 class="card-title">Genero: <span v-text="item.gender"></span></h6>
                                     <h6 class="card-title">Duracion: <span v-text="item.duration"></span></h6>
-                                    <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>     
-                                    <h6 class="card-title">Sala: <span v-text="item.sala"></span></h6>                                 
-                                    <h6 class="card-title">Valor ticket: $ <span v-text="ticket"></span></h6>                        
+                                    <!-- <h6 class="card-title">Sinopsis: <span v-text=""></span></h6>      -->
+                                    <h6 class="card-title" v-if="item.sala !== ''">Sala: <strong class="text-success" v-text="item.sala"></strong></h6>
+                                    <h6 class="card-title" v-else>Sala: <strong class="text-danger">No Asignada</strong></h6>
+                                    <h6 class="card-title">Valor ticket: $ <span v-text="ticket"></span></h6>
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -119,6 +115,9 @@
                             </div>
                             <hr>
                         </div>
+                    </div>
+                    <div class="my-5" v-else>
+                        <h1 class="text-center"><strong>No hay películas agregadas</strong></h1>
                     </div>
                 </div>
             </section>
@@ -133,13 +132,14 @@
                         <div class="modal-body">
                             <div class="container">
                                 <div class="row mx-auto">
+                                    <h6 class="text-center">Tickets restantes: <span v-text="nTickets"></span></h6>
                                     <ul>
                                         <li class="col-2" v-for="(item, index) in rooms[rpos].chairs" :key="index">
                                             <div v-if="item.status === 'available' && nTickets > 0">
-                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item,index)">
+                                                <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item)">
                                                 <label :for="`check_${item.number}`" v-text="item.number">1</label>
                                             </div>
-                                            <div class="disabled" v-else>
+                                            <div class="disabled" v-else-if="item.status === 'unavailable'">
                                                 <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" disabled>
                                                 <label :for="`check_${item.number}`" v-text="item.number">1</label>
                                             </div>
@@ -153,7 +153,7 @@
                             <div class="mx-auto">
                                 <button type="button" class="btn btn-primary" @click="goToPay" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="nTickets == 0">Comprar</button>
                                 <button type="button" class="btn btn-primary" @click="goToPay" v-else>Comprar</button>
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Regresar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="returnTicket">Regresar</button>
                             </div>
                         </div>
                     </div>
@@ -161,12 +161,13 @@
             </div>
             <!-- fin modal sillas -->
             <section id="ticket">
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="rooms.length > 0">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="rooms.length > 0"
+                    data-bs-backdrop="static" data-bs-keyboard="false">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel" v-text="">Boletería</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeBuyTickets"></button>
                             </div>
                             <div class="modal-body">
                                 <div v-if="openPayment == false">
@@ -174,10 +175,12 @@
                                     <select class="form-select" v-model="option" @change="getRoomIndex">
                                         <option v-for="(item, index) in rooms" :key="index" :value="item.roomCode" v-text="item.roomCode">Sala 1</option>
                                     </select>
-                                    <input type="number" class="form-control mt-2" id="" placeholder="Cantidad de tickets" v-if="option.length > 0" v-model="nTickets">
-                                    <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#sillas" v-if="option.length > 0 && nTickets > 0">Elija un puesto</button>
+                                    <label for="numberTickets" v-if="option.length > 0">Cantidad de Tickets:</label>
+                                    <input type="number" class="form-control mt-2" id="numberTickets" placeholder="Cantidad de tickets" v-if="option.length > 0" v-model="nTickets">
+                                    <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#sillas" v-if="option.length > 0 && nTickets > 0" @click="getTotal">Elegir puestos</button>
                                 </div>
                                 <div v-if="openPayment == true">
+                                    <h6 class="text-center"><strong>Total: $</strong><strong v-text="total"></strong></h6>
                                     <h6 class="text-center">SELECCIONA TU MÉTODO DE PAGO</h6>
                                     <div class="d-flex justify-content-center mt-3">
 
@@ -200,7 +203,7 @@
                                 </div>
                             </div>                               
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" @click="cancelPayment">Cancelar</button>
                                 <button type="button" class="btn btn-primary" v-if="openPayment == true" @click="saveChairStatus">Pagar</button>
                             </div>
                         </div>

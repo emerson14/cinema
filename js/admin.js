@@ -24,9 +24,9 @@ var app = new Vue({
             img: '',
             imgW: '',
             synopsis: '',
-
+            sala: '',
         },
-        movies: [//remporalmente con datos quemados, mientras se adpta el frontend para la creacion de peliculas por parte del admin
+        movies: [
             {
             title: 'Buzz Lightyear',
             release: '14/07/2022',
@@ -155,13 +155,10 @@ var app = new Vue({
                 let btn = document.getElementById('closePeli');
                 btn.click();
             }
-           
         },
-        selectImages(cardImg, wallpaper){//cardImg será para mostrar en el card y wallpaper para el carousel
+        selectImages(cardImg, wallpaper){
             this.newMovie.img = cardImg;
             this.newMovie.imgW = wallpaper;
-            //al dar click a guardar en el modal peliculas esta información debe guardarse en el array movies
-            //para luego recorrer el array y mostrar los cards disponibles y las imagenes del carrusel
         },
         addRoom(){
             if(this.newRoom.roomCode.length && this.newRoom.amountChairs > 0) {
