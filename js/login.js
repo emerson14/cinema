@@ -1,5 +1,4 @@
 //LOGIC
-
 var app = new Vue({
     el: '#login',
     data: {
@@ -10,7 +9,7 @@ var app = new Vue({
                 lastName: 'Zero',
                 address: '000-000',
                 phoneNumber: '1234567890',
-                email: 'elias.toro.florez@gmail.com',
+                email: 'cinema.prueba.semillero@gmail.com',
                 password: '1234',
                 role: 'superAdmin',
                 status: 'inactive',
@@ -53,7 +52,7 @@ var app = new Vue({
                             ...this.newUser
                         });
                         this.clearFields();
-                        //this.verifEmail();
+                        this.verifEmail();
                         let closeReg = document.getElementById('closeUserReg');
                         closeReg.click();
                         this.mensaje("Su cuenta ha sido creada, un código de valicación fue enviado a su correo", "success");
@@ -116,14 +115,14 @@ var app = new Vue({
 
                     this.genCode = setInterval(genCode2, 50000);
                     this.startTimer = setInterval(myTimer, 1000);
-                   
+                
 
                     //se abre la modal y ese boton redirige a una nueva funcion 'validateCode'
                     btn = document.getElementById('code');
                     btn.click();
                     this.email = '';
                     this.password = '';
-                   
+                
                 }
                 else{
 
@@ -146,7 +145,7 @@ var app = new Vue({
                 this.seconds -= 1;
             }else{
                 this.minutes -= 1;
-                this.seconds = 60;
+                this.seconds = 59;
             }
         },
         validateCode(){
@@ -168,7 +167,6 @@ var app = new Vue({
                 this.password = '';
                 setTimeout(function(){     
                     window.location.href = "app.html";
-              
                 
                 }.bind(this), 3000);
             }
@@ -185,10 +183,10 @@ var app = new Vue({
                         x += r;
                     }
                     this.code = x;
-                    //this.sendEmail();
+                    this.sendEmail();
                     console.log(this.code);
         },
-        /*async sendEmail(){
+        async sendEmail(){
             if (this.code !== '') {
                 this._email = {
                     msg: `Su código de vericación es: ${this.code}` //se demora apox 4 min en llegar al correo
@@ -221,7 +219,7 @@ var app = new Vue({
                     .then(response => response.json()) 
                     .then(json => console.log(json))
                     .catch(err => console.log(err));
-        },*/
+        },
         mensaje: function (msj, icono) {//para enviar alerts de sweet alert
             const Toast = Swal.mixin({
                 toast: true,
