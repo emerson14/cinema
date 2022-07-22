@@ -113,7 +113,7 @@ var app = new Vue({
 
                     this.generateCode();
 
-                    this.genCode = setInterval(genCode2, 500000);
+                    this.genCode = setInterval(genCode2, 300000);
                     this.startTimer = setInterval(myTimer, 1000);
                 
 
