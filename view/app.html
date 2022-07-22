@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning">Comprar ticket</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning" @click="getMovieIndex(index)">Comprar ticket</button>
                                     </div> 
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                 <div class="row mx-auto">
                                     <h6 class="text-center">Tickets restantes: <span v-text="nTickets"></span></h6>
                                     <ul>
-                                        <li class="col-2" v-for="(item, index) in rooms[rpos].chairs" :key="index">
+                                        <li class="col-2" v-for="(item, index) in rooms[rPos].chairs" :key="index">
                                             <div v-if="item.status === 'available' && nTickets > 0">
                                                 <input type="checkbox" :id="`check_${item.number}`" name="check" :value="item.number" @click="chairStatus(item)">
                                                 <label :for="`check_${item.number}`" v-text="item.number">1</label>
@@ -166,7 +166,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel" v-text="">Boletería</h5>
+                                <h5 class="modal-title" id="exampleModalLabel" v-text="movies[mPos].title">movie name</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeBuyTickets"></button>
                             </div>
                             <div class="modal-body">
@@ -213,7 +213,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel" v-text="">Boletería</h5>
+                                <h5 class="modal-title" id="exampleModalLabel" ></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">

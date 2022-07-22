@@ -182,7 +182,6 @@ var app = new Vue({
                         x += r;
                     }
                     this.code = x;
-                    console.log(this.code);
         },
 
 

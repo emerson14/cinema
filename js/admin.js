@@ -25,6 +25,8 @@ var app = new Vue({
             imgW: '',
             synopsis: '',
             sala: '',
+            avChairs: 0,
+            occupChairs: 0,
         },
         movies: [
             {
@@ -256,8 +258,24 @@ var app = new Vue({
             })
         },
 
-        showRooms(index){
+        showRooms(item,index){
             this.indexRoom = index;
+            /*const avCounter = item.chairs.map(element => {
+                if (element.status == 'available') {
+                    return element
+                }
+            });*/
+            let avCounter = 0;
+            let occupCounter = 0;
+            item.chairs.forEach(e => {
+                if (e.status === 'available') {
+                    avCounter += 1;
+                }else{
+                    occupCounter += 1;
+                }
+            })
+            this.avChairs = avCounter;
+            this.occupChairs = occupCounter;
         },
         logout(){
             const swalWithBootstrapButtons = Swal.mixin({
@@ -300,8 +318,6 @@ var app = new Vue({
         },
 
         editUser(){
-            
-            console.log('edittt');
             this.users.forEach(user => {
                 if(this.user2.id == user.id){
                     user.name = this.user2.name;
@@ -396,7 +412,6 @@ var app = new Vue({
             this.users.forEach(element => {
                 if(element.id == this.user.id){
                   this.user = element;
-                  console.log("hola");
                 }  
               });
         }else{

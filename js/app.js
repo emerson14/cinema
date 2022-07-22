@@ -68,7 +68,8 @@ var app = new Vue({
         ],
         user: null,
         option: '',
-        rpos: 0,
+        rPos: 0,
+        mPos: 0,
         openPayment: false,
         nTickets: 0,
         pMethod: '',
@@ -102,14 +103,15 @@ var app = new Vue({
                 }
             })
         },
-     
+        getMovieIndex(index){
+            this.mPos = index;
+        },
         getRoomIndex(){
             const index = this.rooms.findIndex((object) => {
                 return object.roomCode == this.option;
             });
-            this.rpos = index;
+            this.rPos = index;
             let test = document.querySelectorAll('.checkRoom');
-            console.log(test);
         },
         getTotal(){
             this.total = this.nTickets*this.ticket;
@@ -174,7 +176,7 @@ var app = new Vue({
                     this.option = '';
                     this.pMethod = '';
                     this.openPayment = false;
-                    this.rpos = 0;
+                    this.rPos = 0;
                     let btnX = document.getElementById('closeBuyTickets');
                     btnX.click();
                     this.mensaje("Compra cancelada con exito", "success");
@@ -226,7 +228,6 @@ var app = new Vue({
             this.users.forEach(element => {
                 if(element.id == this.user.id){
                   this.user = element;
-                  console.log("hola");
                 }  
               });
         }else{

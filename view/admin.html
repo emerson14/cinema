@@ -385,7 +385,7 @@
                             <div class="card text-dark bg-light mb-3" style="max-width: 20rem;">
                                 <h5 class="text-center" v-text="item.roomCode">TITULO<span class="text-danger"
                                         v-text=""></span></h5>
-                                <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala" @click="showRooms(index)">
+                                <div class="card-body  btn" data-bs-toggle="modal" data-bs-target="#verSala" @click="showRooms(item,index)">
                                     <h6 class="card-title">Nombre: <span v-text="item.roomCode"></span></h6>
                                     <h6 class="card-title">No. Asientos: <span v-text="item.amountChairs"></span></h6>
                                     <h6 class="card-title">Película Asignada: <span v-text="item.movie"></span></h6>
@@ -446,14 +446,14 @@
                                 <div class="container" id="sillas">
                                     <div class="row">
                                         <div class="col-6">
-                                            <p><strong>Vacant Chairs: </strong></p>
+                                            <p><strong>Sillas Disponibles: </strong></p>
                                             <input type="checkbox" id="check_example1" name="check" value="" disabled>
-                                            <label for="check_example1">1</label>
+                                            <label for="check_example1" v-text="avChairs">1</label>
                                         </div>
                                         <div class="disabled col-6">
-                                            <p><strong>Occupied Chairs: </strong></p>
+                                            <p><strong>Sillas Ocupadas: </strong></p>
                                             <input type="checkbox" id="check_example1" name="check" value="" disabled>
-                                            <label for="check_example1">1</label>
+                                            <label for="check_example1" v-text="occupChairs">1</label>
                                         </div>
                                     </div>
                                     <hr>
