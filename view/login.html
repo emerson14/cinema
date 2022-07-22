@@ -107,7 +107,7 @@
       </div>
       </div>
       <div class="modal-footer" id="modalregistrarsefooter">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUserReg">Cerrar</button>
       </div>
     </div>
   </div>
@@ -125,7 +125,7 @@
           <div class="card" id="cardcode" >
               <div class="card-body" > 
                 <h5 class="card-title">Codigo de confirmacion</h5>
-                <h5 class="text-center text-danger">Nuevo código en: <strong>00</strong>:<strong v-if="seconds < 10">0</strong><strong v-text="seconds"></strong></h5>
+                <h5 class="text-center text-danger">Nuevo código en: <strong>0</strong><strong v-text="minutes"></strong>:<strong v-if="seconds < 10">0</strong><strong v-text="seconds"></strong></h5>
                 <p class="card-text">Le hemos enviado un codigo confirmacion, por favor digitelo:</p>
                 <input    class="form-control" @keyup.enter="validateCode" v-model="confirmCode">
                 <a href="#" class="card-link">Reenviar Nuevo Codido</a>

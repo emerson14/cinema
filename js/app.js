@@ -53,7 +53,6 @@ var app = new Vue({
                 return object.roomCode == this.option;
             });
             this.rPos = index;
-            let test = document.querySelectorAll('.checkRoom');
         },
         getTotal(){
             this.total = this.nTickets*this.ticket;
