@@ -53,7 +53,7 @@ var app = new Vue({
                             ...this.newUser
                         });
                         this.clearFields();
-                        this.verifEmail();
+                        //this.verifEmail();
                         let closeReg = document.getElementById('closeUserReg');
                         closeReg.click();
                         this.mensaje("Su cuenta ha sido creada, un código de valicación fue enviado a su correo", "success");
@@ -114,7 +114,7 @@ var app = new Vue({
 
                     this.generateCode();
 
-                    this.genCode = setInterval(genCode2, 500000);
+                    this.genCode = setInterval(genCode2, 50000);
                     this.startTimer = setInterval(myTimer, 1000);
                    
 
@@ -185,10 +185,10 @@ var app = new Vue({
                         x += r;
                     }
                     this.code = x;
-                    this.sendEmail();
+                    //this.sendEmail();
                     console.log(this.code);
         },
-        async sendEmail(){
+        /*async sendEmail(){
             if (this.code !== '') {
                 this._email = {
                     msg: `Su código de vericación es: ${this.code}` //se demora apox 4 min en llegar al correo
@@ -221,7 +221,7 @@ var app = new Vue({
                     .then(response => response.json()) 
                     .then(json => console.log(json))
                     .catch(err => console.log(err));
-        },
+        },*/
         mensaje: function (msj, icono) {//para enviar alerts de sweet alert
             const Toast = Swal.mixin({
                 toast: true,
@@ -242,7 +242,6 @@ var app = new Vue({
         updateLocalStorage(){
             localStorage.setItem('users', JSON.stringify(this.users));
             localStorage.setItem('user', JSON.stringify(this.user));
-           
         },
 
     },
@@ -251,7 +250,7 @@ var app = new Vue({
             this.users = JSON.parse(localStorage.getItem('users'));
         }else{
             this.users = this.users;
-          
+            this.updateLocalStorage();
         }
 
         if (localStorage.getItem('user') !== null) {
