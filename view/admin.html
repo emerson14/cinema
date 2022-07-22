@@ -47,15 +47,15 @@
             </nav>
         </header>
         <!-- /Buttons -->
-        <section class="mt-5 p-5">
-            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#salas">Salas</button>
-            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#pelis">Películas</button>
+        <section class="mt-5 container">
+            <button class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#salas">Agregar Salas</button>
+            <button class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#pelis">Agregar Películas</button>
         </section>
         <!-- /Buttons -->
         <!-- Table User -->
         <section v-if="user.role == 'superAdmin'">
             <div class="container p-3">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span
                         class="material-icons"> person_add_alt</span></button>
             </div>
             <div class="container table-responsive">
@@ -79,7 +79,7 @@
                             <td v-if="item.status == 'inactive'" class="text-danger"><span
                                     v-text="item.status">estado</span></td>
                             <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit"
                                     @click='loadUser(item)'><span class="material-icons">edit</span></button>
                                 <button class="btn btn-danger" v-if="item.role !== 'superAdmin'"
                                     @click="delUser(index)"><span class="material-icons">delete_forever</span></button>

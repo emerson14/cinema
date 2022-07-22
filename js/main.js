@@ -14,6 +14,7 @@ var app = new Vue({
                 role: 'superAdmin',
                 status: 'inactive',
             },
+            
         ],
         newUser: {
             name: '',
