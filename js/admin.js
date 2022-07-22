@@ -27,6 +27,7 @@ var app = new Vue({
             sala: '',
             avChairs: 0,
             occupChairs: 0,
+            class: 'carousel-item',
         },
         movies: [
             {
@@ -144,14 +145,13 @@ var app = new Vue({
             this.confirmPass = '';
         },
         addMovie(){//agrega la nueva pelicula en el arreglo de peliculas disponibles (movies)
-            //FALTA VALIDAR CON LOS CAMPOS DEL FRONTEND
-
             if(this.newMovie.title == '' || this.newMovie.release == '' || this.newMovie.duration == '' || this.newMovie.gender == '' || this.newMovie.img == '' || this.newMovie.imgW == ''  || this.newMovie.synopsis == '' ){
                 this.mensaje('Rellena todos los campos para agregar un pelicula', 'error');
                 return
             }
             else{
                 this.movies.push({...this.newMovie});
+                this.movies[0].class = 'carousel-item active'
                 this.updateLocalStorage();
                 this.mensaje('Se agrego correctamente la pelicula', 'succes');
                 let btn = document.getElementById('closePeli');
